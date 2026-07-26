@@ -1,0 +1,1811 @@
+/* ===============================
+   MISSION ROOM
+================================ */
+
+.mission-room{
+    position:fixed;
+    inset:0;
+
+    display:none;
+
+    overflow:hidden;
+
+    background:transparent;
+
+    color:white;
+
+    z-index:20;
+}
+
+
+/* ===============================
+   AMBIENT LAYER
+================================ */
+
+.mission-ambient{
+    position:absolute;
+    inset:0;
+
+    pointer-events:none;
+
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(30,50,90,0.08),
+            transparent 60%
+        );
+
+    z-index:0;
+}
+
+
+/* ===============================
+   BOOT SEQUENCE
+================================ */
+
+.boot-sequence{
+    position:absolute;
+    inset:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    z-index:30;
+
+    padding:40px;
+}
+#heartZone{
+
+    display:none;
+
+}
+#emotionalDatabase{
+    display:none;
+}
+
+.boot-terminal{
+    width:min(700px,90vw);
+
+    font-family:"Space Mono",monospace;
+}
+
+
+.boot-label{
+    color:rgba(255,255,255,0.35);
+
+    font-size:11px;
+
+    letter-spacing:3px;
+
+    margin-bottom:30px;
+}
+
+
+#terminalBoot{
+    min-height:220px;
+
+    color:#bfffee;
+
+    font-size:15px;
+
+    line-height:2;
+
+    text-shadow:
+        0 0 8px rgba(100,255,220,.7),
+        0 0 20px rgba(100,255,220,.3);
+}
+
+
+/* ===============================
+   PROGRESS BAR
+================================ */
+
+.boot-progress-wrap{
+    margin-top:30px;
+
+    display:flex;
+    align-items:center;
+
+    gap:18px;
+}
+
+
+.boot-progress-track{
+    flex:1;
+
+    height:3px;
+
+    background:rgba(255,255,255,.12);
+
+    overflow:hidden;
+}
+
+
+.boot-progress{
+    width:0%;
+    height:100%;
+
+    background:#bfffee;
+
+    box-shadow:
+        0 0 10px #bfffee,
+        0 0 25px rgba(100,255,220,.7);
+
+    transition:width .15s linear;
+}
+
+
+#bootPercentage{
+    width:50px;
+
+    font-family:"Space Mono",monospace;
+
+    font-size:12px;
+
+    color:#bfffee;
+}
+
+
+/* ===============================
+   MAIN INTERFACE
+================================ */
+
+.mission-interface{
+    position:relative;
+
+    width:100%;
+    height:100%;
+
+    z-index:10;
+
+    display:flex;
+    flex-direction:column;
+
+    padding:30px 45px;
+
+    box-sizing:border-box;
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transform:translateY(30px);
+
+    /* Let content scroll instead of overlapping the nav
+       if the heading wraps to extra lines / window is short */
+    overflow-y:auto;
+}
+
+
+/* ===============================
+   TOP BAR
+================================ */
+
+.mission-topbar{
+    display:flex;
+
+    justify-content:space-between;
+    align-items:center;
+
+    padding-bottom:20px;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.12);
+
+    font-family:"Space Mono",monospace;
+
+    font-size:11px;
+
+    letter-spacing:2px;
+}
+
+
+.system-dot{
+    display:inline-block;
+
+    width:7px;
+    height:7px;
+
+    margin-right:10px;
+
+    border-radius:50%;
+
+    background:#8affd1;
+
+    box-shadow:
+        0 0 10px #8affd1;
+}
+
+
+.mission-status{
+    color:rgba(255,255,255,.45);
+}
+
+
+/* ===============================
+   COMMAND AREA
+================================ */
+
+.mission-command{
+    flex:1 1 auto;
+    min-height:0;
+
+    display:flex;
+    flex-direction:column;
+
+    justify-content:center;
+
+    max-width:1000px;
+
+    margin:auto;
+
+    width:100%;
+
+    box-sizing:border-box;
+}
+
+
+.mission-eyebrow{
+    font-family:"Space Mono",monospace;
+
+    font-size:11px;
+
+    letter-spacing:4px;
+
+    color:#9fffe4;
+
+    margin-bottom:20px;
+}
+
+
+.mission-command h1{
+    margin:0;
+
+    max-width:900px;
+
+    font-size:clamp(40px,6.5vw,92px);
+
+    line-height:.95;
+
+    letter-spacing:-5px;
+}
+
+
+#missionAgentName{
+    display:block;
+
+    color:#ff73c6;
+
+    text-shadow:
+        0 0 30px rgba(255,80,190,.4);
+}
+
+
+.mission-description{
+    max-width:550px;
+
+    margin-top:30px;
+
+    color:rgba(255,255,255,.6);
+
+    font-size:16px;
+
+    line-height:1.8;
+}
+
+
+/* ===============================
+   DATA GRID
+================================ */
+
+.mission-data-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:10px;
+
+    margin-top:50px;
+}
+
+
+.mission-data-card{
+    padding:18px;
+
+    border:
+        1px solid rgba(255,255,255,.12);
+
+    background:
+        rgba(255,255,255,.025);
+
+    backdrop-filter:blur(10px);
+}
+
+
+.mission-data-card span{
+    display:block;
+
+    margin-bottom:10px;
+
+    font-family:"Space Mono",monospace;
+
+    font-size:9px;
+
+    letter-spacing:2px;
+
+    color:rgba(255,255,255,.35);
+}
+
+
+.mission-data-card strong{
+    font-size:12px;
+
+    letter-spacing:1px;
+}
+
+
+/* ===============================
+   NAVIGATION — LOCKED TO BOTTOM
+================================ */
+
+.mission-nav{
+    position:relative;
+
+    flex-shrink:0;
+
+    margin-top:40px;
+
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+
+    gap:8px;
+
+    z-index:20;
+}
+
+.mission-nav button{
+    min-height:52px;
+
+    padding:16px;
+
+    background:rgba(0,0,0,.25);
+
+    border:1px solid rgba(255,255,255,.12);
+
+    color:rgba(255,255,255,.65);
+
+    font-family:"Space Mono",monospace;
+
+    font-size:10px;
+    letter-spacing:1px;
+
+    cursor:pointer;
+
+    transition:.3s ease;
+}
+.mission-nav button:hover{
+    color:#fff;
+    border-color:#ff73c6;
+
+    background:rgba(255,115,198,.12);
+
+    box-shadow:
+        0 0 25px rgba(255,80,190,.18);
+}
+
+/* ===============================
+   MOBILE
+================================ */
+
+@media(max-width:700px){
+
+    .mission-interface{
+        padding:25px 20px;
+    }
+
+    .mission-data-grid{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .mission-nav{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .mission-command h1{
+        letter-spacing:-2px;
+    }
+
+}
+/* TEMP FIX — keep future screens from blocking login */
+#heartIntro.hidden,
+#missionRoom.hidden,
+#transitionLayer.hidden {
+    display: none !important;
+    pointer-events: none !important;
+}
+
+#verifyScreen {
+    position: relative;
+    z-index: 10000;
+    pointer-events: auto;
+}
+
+#nameInput {
+    position: relative;
+    z-index: 10001;
+    pointer-events: auto;
+}
+/* ===========================
+   ENTERGALACTIC BACKGROUND
+=========================== */
+
+#entergalacticBackground {
+    position: fixed;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            rgba(5, 0, 20, 0.15),
+            rgba(5, 0, 20, 0.3)
+        ),
+        url("https://pub-bf59e4faf5904fc0875492866e65f840.r2.dev/assets/Images/entergalactic-bg.png");
+
+    background-size: cover;
+    background-position: center;
+
+    opacity: 0;
+    transform: scale(1.08);
+
+    transition:
+        opacity 7s ease,
+        transform 12s ease;
+
+    z-index: 0;
+    pointer-events: none;
+}
+
+#entergalacticBackground.enter {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Mission UI stays above artwork */
+#missionRoom > *:not(#entergalacticBackground) {
+    position: relative;
+    z-index: 2;
+}
+/* ===============================
+   ENTERGALACTIC WORLD — CINEMATIC BLEED
+================================ */
+
+#entergalacticBackground{
+    filter:
+        saturate(.7)
+        brightness(.45)
+        blur(8px);
+
+    will-change:
+        opacity,
+        transform,
+        filter;
+}
+
+#entergalacticBackground.enter{
+    opacity:1;
+
+    transform:
+        scale(1);
+
+    filter:
+        saturate(1)
+        brightness(.75)
+        blur(0px);
+
+    animation:
+        entergalacticDrift
+        20s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+@keyframes entergalacticDrift{
+
+    0%{
+        background-position:
+            50% 50%;
+    }
+
+    100%{
+        background-position:
+            53% 47%;
+    }
+
+}
+/* ===============================
+   MISSION ROOM — FINAL LAYER ORDER
+================================ */
+
+#missionRoom{
+    position:fixed;
+    inset:0;
+    isolation:isolate;
+}
+
+/* Background artwork */
+#entergalacticBackground{
+    z-index:0;
+}
+
+/* Ambient effects */
+.mission-ambient{
+    z-index:1;
+}
+
+/* Boot terminal */
+#bootSequence{
+    z-index:30;
+}
+
+/* Main mission interface */
+#missionInterface{
+    position:relative;
+    z-index:20;
+}
+/* ===============================
+   MEMORY FILES — ARCHIVE
+================================ */
+
+.memory-files{
+    position:absolute;
+    inset:0;
+    z-index:50;
+
+    padding:30px 45px;
+    box-sizing:border-box;
+
+    display:flex;
+    flex-direction:column;
+
+    overflow-y:auto;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(7,2,30,.35),
+            rgba(35,0,55,.2),
+            rgba(0,10,35,.35)
+        );
+
+    backdrop-filter:blur(6px);
+
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+
+    transform:translateY(50px) scale(.98);
+
+    transition:
+        opacity .8s ease,
+        transform 1s cubic-bezier(.16,1,.3,1),
+        visibility .8s;
+}
+
+
+/* OPEN STATE */
+
+.memory-files.open{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+
+/* ===============================
+   ARCHIVE TOP BAR
+================================ */
+
+.memory-files-topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding-bottom:20px;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.15);
+
+    font-family:"Space Mono",monospace;
+
+    font-size:10px;
+    letter-spacing:2px;
+}
+
+
+.memory-back-button{
+    padding:0;
+
+    border:none;
+    background:none;
+
+    color:rgba(255,255,255,.6);
+
+    font-family:"Space Mono",monospace;
+    font-size:10px;
+    letter-spacing:2px;
+
+    cursor:pointer;
+
+    transition:.3s ease;
+}
+
+
+.memory-back-button:hover{
+    color:#ff73c6;
+
+    text-shadow:
+        0 0 15px rgba(255,115,198,.8);
+}
+
+
+.memory-system-status{
+    color:rgba(255,255,255,.45);
+}
+
+
+/* ===============================
+   MEMORY HEADER
+================================ */
+
+.memory-files-header{
+    width:min(1000px,100%);
+
+    margin:
+        70px auto
+        50px;
+}
+
+
+.memory-files-eyebrow{
+    margin-bottom:18px;
+
+    color:#9fffe4;
+
+    font-family:"Space Mono",monospace;
+
+    font-size:10px;
+
+    letter-spacing:4px;
+}
+
+
+.memory-files-header h2{
+    margin:0;
+
+    font-size:
+        clamp(60px,10vw,145px);
+
+    line-height:.8;
+
+    letter-spacing:-7px;
+}
+
+
+.memory-files-header h2 span{
+    display:block;
+
+    color:#ff73c6;
+
+    text-shadow:
+        0 0 40px
+        rgba(255,80,190,.35);
+}
+
+
+.memory-files-header > p:last-child{
+    max-width:500px;
+
+    margin-top:35px;
+
+    color:
+        rgba(255,255,255,.65);
+
+    font-size:16px;
+
+    line-height:1.7;
+}
+
+
+/* ===============================
+   MEMORY GRID
+================================ */
+
+.memory-grid{
+    width:min(1000px,100%);
+
+    margin:
+        0 auto
+        80px;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:14px;
+}
+
+
+/* ===============================
+   MEMORY CARD
+================================ */
+
+.memory-card{
+    position:relative;
+
+    min-height:260px;
+
+    padding:25px;
+
+    display:flex;
+    flex-direction:column;
+
+    justify-content:space-between;
+
+    text-align:left;
+
+    overflow:hidden;
+
+    color:white;
+
+    border:
+        1px solid
+        rgba(255,255,255,.14);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.07),
+            rgba(255,255,255,.015)
+        );
+
+    backdrop-filter:
+        blur(14px);
+
+    cursor:pointer;
+
+    transition:
+        transform .5s
+            cubic-bezier(.16,1,.3,1),
+        border-color .4s ease,
+        box-shadow .4s ease;
+}
+
+
+/* ENTERGALACTIC LIGHT INSIDE CARD */
+
+.memory-card::before{
+    content:"";
+
+    position:absolute;
+
+    width:250px;
+    height:250px;
+
+    top:-120px;
+    right:-100px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,70,190,.3),
+            rgba(100,40,255,.12),
+            transparent 70%
+        );
+
+    filter:blur(20px);
+
+    transition:
+        transform .7s ease,
+        opacity .7s ease;
+
+    pointer-events:none;
+}
+
+
+/* SCANNING LINE */
+
+.memory-card::after{
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    right:0;
+
+    height:1px;
+
+    top:-10%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #9fffe4,
+            transparent
+        );
+
+    opacity:0;
+
+    pointer-events:none;
+}
+
+
+/* HOVER */
+
+.memory-card:hover{
+    transform:
+        translateY(-8px)
+        scale(1.015);
+
+    border-color:
+        rgba(255,115,198,.65);
+
+    box-shadow:
+        0 25px 60px
+        rgba(0,0,0,.3),
+        0 0 35px
+        rgba(255,80,190,.12);
+}
+
+
+.memory-card:hover::before{
+    transform:
+        scale(1.5)
+        translate(-30px,30px);
+}
+
+
+.memory-card:hover::after{
+    opacity:1;
+
+    animation:
+        memoryScan
+        1.5s ease;
+}
+
+
+@keyframes memoryScan{
+
+    from{
+        top:0%;
+    }
+
+    to{
+        top:100%;
+    }
+
+}
+
+
+/* ===============================
+   CARD TEXT
+================================ */
+
+.memory-number{
+    position:relative;
+    z-index:2;
+
+    color:
+        rgba(255,255,255,.4);
+
+    font-family:
+        "Space Mono",monospace;
+
+    font-size:9px;
+
+    letter-spacing:3px;
+}
+
+
+.memory-card-content{
+    position:relative;
+
+    z-index:2;
+}
+
+
+.memory-card-content p{
+    margin:
+        0 0 12px;
+
+    color:#9fffe4;
+
+    font-family:
+        "Space Mono",monospace;
+
+    font-size:8px;
+
+    letter-spacing:2px;
+}
+
+
+.memory-card-content h3{
+    margin:
+        0 0 10px;
+
+    font-size:
+        clamp(25px,3vw,42px);
+
+    letter-spacing:-2px;
+}
+
+
+.memory-card-content span{
+    color:
+        rgba(255,255,255,.5);
+
+    font-size:13px;
+}
+
+
+/* ===============================
+   MISSION ROOM EXIT ANIMATION
+================================ */
+
+.mission-interface.archive-open{
+    opacity:0 !important;
+
+    transform:
+        scale(.96)
+        translateY(-30px) !important;
+
+    filter:
+        blur(12px);
+
+    pointer-events:none;
+
+    transition:
+        opacity .7s ease,
+        transform 1s
+            cubic-bezier(.16,1,.3,1),
+        filter .7s ease;
+}
+
+
+/* ===============================
+   MOBILE
+================================ */
+
+@media(max-width:700px){
+
+    .memory-files{
+        padding:
+            25px 20px;
+    }
+
+
+    .memory-files-topbar{
+        align-items:flex-start;
+
+        gap:20px;
+    }
+
+
+    .memory-system-status{
+        text-align:right;
+    }
+
+
+    .memory-files-header{
+        margin-top:50px;
+    }
+
+
+    .memory-files-header h2{
+        letter-spacing:-4px;
+    }
+
+
+    .memory-grid{
+        grid-template-columns:1fr;
+    }
+
+
+    .memory-card{
+        min-height:220px;
+    }
+
+}
+/* ===============================
+   FILE 001 — THROUGH MY EYES
+================================ */
+
+.memory-experience{
+    position:absolute;
+    inset:0;
+    z-index:70;
+
+    overflow-y:auto;
+    overflow-x:hidden;
+
+    padding:30px 45px 100px;
+    box-sizing:border-box;
+
+    background:rgba(5,0,20,.18);
+    backdrop-filter:blur(4px);
+
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+
+    transform:translateY(40px) scale(.98);
+
+    transition:
+        opacity .8s ease,
+        transform 1s cubic-bezier(.16,1,.3,1),
+        visibility .8s;
+}
+
+.memory-experience.open{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+    transform:translateY(0) scale(1);
+}
+
+
+/* ===============================
+   TOP BAR
+================================ */
+
+.memory-experience-topbar{
+    position:relative;
+    z-index:5;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding-bottom:20px;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.15);
+}
+
+
+/* ===============================
+   FILE INTRO
+================================ */
+
+.memory-experience-intro{
+    min-height:calc(100vh - 100px);
+
+    width:min(1000px,100%);
+    margin:auto;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:flex-start;
+}
+
+.memory-experience-intro h2{
+    margin:0;
+
+    font-size:clamp(60px,10vw,145px);
+    line-height:.8;
+    letter-spacing:-7px;
+}
+
+.memory-experience-intro h2 span{
+    display:block;
+
+    color:#ff73c6;
+
+    text-shadow:
+        0 0 40px rgba(255,80,190,.4);
+}
+
+.memory-opening-message{
+    max-width:600px;
+
+    margin-top:40px;
+
+    color:rgba(255,255,255,.7);
+
+    font-size:16px;
+    line-height:1.8;
+}
+
+
+/* ===============================
+   RECONSTRUCT BUTTON
+================================ */
+
+.begin-memory-button{
+    margin-top:35px;
+    padding:16px 22px;
+
+    border:
+        1px solid rgba(159,255,228,.5);
+
+    background:
+        rgba(159,255,228,.05);
+
+    color:#9fffe4;
+
+    font-family:"Space Mono",monospace;
+    font-size:10px;
+    letter-spacing:2px;
+
+    cursor:pointer;
+
+    transition:.4s ease;
+}
+
+.begin-memory-button:hover{
+    background:rgba(159,255,228,.12);
+
+    box-shadow:
+        0 0 30px rgba(159,255,228,.15);
+
+    transform:translateY(-3px);
+}
+
+
+/* ===============================
+   RECONSTRUCTION OVERLAY
+================================ */
+
+.memory-reconstruction{
+    position:fixed;
+    inset:0;
+
+    z-index:100;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(255,70,190,.15),
+            rgba(5,0,20,.96) 55%
+        );
+
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+
+    transition:
+        opacity .6s ease,
+        visibility .6s;
+}
+
+.memory-reconstruction.active{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+}
+
+#reconstructionText{
+    color:#9fffe4;
+
+    font-family:"Space Mono",monospace;
+    font-size:12px;
+    letter-spacing:4px;
+
+    text-shadow:
+        0 0 15px rgba(159,255,228,.7);
+}
+
+.reconstruction-line{
+    width:0;
+    max-width:500px;
+    height:1px;
+
+    margin-top:25px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #9fffe4,
+            #ff73c6,
+            transparent
+        );
+
+    box-shadow:
+        0 0 20px rgba(255,115,198,.7);
+}
+
+.memory-reconstruction.active
+.reconstruction-line{
+    animation:
+        reconstructLine 2.5s
+        cubic-bezier(.16,1,.3,1)
+        forwards;
+}
+
+@keyframes reconstructLine{
+    from{
+        width:0;
+    }
+
+    to{
+        width:min(500px,70vw);
+    }
+}
+
+
+/* ===============================
+   MEMORY FRAGMENTS
+================================ */
+
+.memory-fragments{
+    width:min(1100px,100%);
+
+    margin:0 auto;
+
+    display:none;
+    flex-direction:column;
+
+    gap:180px;
+
+    padding:
+        100px 0
+        160px;
+}
+
+.memory-fragments.reconstructed{
+    display:flex;
+}
+
+
+/* ===============================
+   INDIVIDUAL FRAGMENT
+================================ */
+
+.memory-fragment{
+    position:relative;
+
+    min-height:600px;
+
+    display:grid;
+
+    grid-template-columns:
+        minmax(0,1.15fr)
+        minmax(280px,.85fr);
+
+    align-items:center;
+
+    gap:70px;
+
+    opacity:0;
+
+    transform:
+        translateY(100px)
+        scale(.96);
+
+    filter:blur(12px);
+
+    transition:
+        opacity 1.2s ease,
+        transform 1.4s cubic-bezier(.16,1,.3,1),
+        filter 1.2s ease;
+}
+
+
+/* Alternate direction */
+
+.memory-fragment.reverse{
+    grid-template-columns:
+        minmax(280px,.85fr)
+        minmax(0,1.15fr);
+}
+
+.memory-fragment.reverse
+.memory-photo{
+    order:2;
+}
+
+.memory-fragment.reverse
+.memory-fragment-copy{
+    order:1;
+}
+
+
+/* Scroll reveal */
+
+.memory-fragment.visible{
+    opacity:1;
+
+    transform:
+        translateY(0)
+        scale(1);
+
+    filter:blur(0);
+}
+
+
+/* ===============================
+   PHOTO / VIDEO FRAME
+================================ */
+
+.memory-photo{
+    position:relative;
+
+    width:100%;
+
+    border:
+        1px solid rgba(255,255,255,.15);
+
+    background:#080510;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 35px 80px rgba(0,0,0,.4),
+        0 0 50px rgba(255,80,190,.08);
+}
+
+.memory-photo::before{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    z-index:2;
+
+    pointer-events:none;
+
+    background:
+        linear-gradient(
+            180deg,
+            transparent 60%,
+            rgba(5,0,20,.25)
+        );
+}
+
+.memory-photo img,
+.memory-photo video{
+    display:block;
+
+    width:100%;
+    height:auto;
+
+    max-height:75vh;
+
+    object-fit:contain;
+
+    transition:
+        transform 1.5s
+        cubic-bezier(.16,1,.3,1);
+}
+
+.memory-photo:hover img{
+    transform:scale(1.035);
+}
+
+
+/* ===============================
+   VIDEO FILE
+================================ */
+
+.memory-video{
+    box-shadow:
+        0 35px 80px rgba(0,0,0,.45),
+        0 0 50px rgba(120,80,255,.12);
+}
+
+.memory-video::after{
+    content:"MOTION FILE";
+
+    position:absolute;
+
+    top:15px;
+    left:15px;
+
+    z-index:3;
+
+    padding:7px 10px;
+
+    background:rgba(0,0,0,.55);
+
+    border:
+        1px solid rgba(159,255,228,.35);
+
+    color:#9fffe4;
+
+    font-family:"Space Mono",monospace;
+    font-size:8px;
+    letter-spacing:2px;
+
+    pointer-events:none;
+}
+
+
+/* ===============================
+   FRAGMENT COPY
+================================ */
+
+.memory-fragment-copy{
+    position:relative;
+    z-index:4;
+}
+
+.memory-fragment-copy > span{
+    display:block;
+
+    margin-bottom:20px;
+
+    color:#9fffe4;
+
+    font-family:"Space Mono",monospace;
+    font-size:9px;
+    letter-spacing:3px;
+}
+
+.memory-fragment-copy h3{
+    margin:0 0 25px;
+
+    font-size:
+        clamp(35px,5vw,70px);
+
+    line-height:.95;
+
+    letter-spacing:-3px;
+}
+
+.memory-fragment-copy p{
+    white-space:pre-line;
+
+    color:rgba(255,255,255,.68);
+
+    font-size:16px;
+    line-height:1.9;
+}
+
+
+/* ===============================
+   PRIORITY MEMORY
+================================ */
+
+.favourite-fragment{
+    padding:40px;
+
+    border:
+        1px solid rgba(255,115,198,.25);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,80,190,.07),
+            rgba(100,50,255,.04)
+        );
+
+    box-shadow:
+        0 0 80px
+        rgba(255,80,190,.08);
+}
+
+
+/* ===============================
+   FINAL FRAGMENT
+================================ */
+
+.final-fragment{
+    min-height:80vh;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+}
+
+.final-fragment
+.memory-fragment-copy{
+    max-width:750px;
+}
+
+.final-fragment
+.memory-fragment-copy h3{
+    font-size:
+        clamp(50px,8vw,110px);
+}
+
+
+/* ===============================
+   MOBILE
+================================ */
+
+@media(max-width:750px){
+
+    .memory-experience{
+        padding:
+            25px 20px
+            80px;
+    }
+
+    .memory-experience-topbar{
+        gap:20px;
+        align-items:flex-start;
+    }
+
+    .memory-experience-intro h2{
+        letter-spacing:-4px;
+    }
+
+    .memory-fragments{
+        gap:110px;
+    }
+
+    .memory-fragment,
+    .memory-fragment.reverse{
+        min-height:auto;
+
+        grid-template-columns:1fr;
+
+        gap:35px;
+    }
+
+    .memory-fragment.reverse
+    .memory-photo,
+    .memory-fragment.reverse
+    .memory-fragment-copy{
+        order:initial;
+    }
+
+    .favourite-fragment{
+        padding:20px;
+    }
+
+}
+@media(max-width:700px){
+
+    .mission-nav{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+/* =========================================
+   FINAL MISSION ROOM LAYOUT OVERRIDE
+========================================= */
+
+.mission-interface{
+    position:absolute !important;
+    inset:0 !important;
+    width:100% !important;
+    height:100% !important;
+    padding:30px 45px 25px !important;
+    box-sizing:border-box !important;
+}
+
+.mission-command{
+    flex:1 !important;
+    display:flex !important;
+    flex-direction:column !important;
+    justify-content:center !important;
+
+    max-width:1000px !important;
+    width:100% !important;
+    margin:0 auto !important;
+
+    /* reserve space for bottom navigation */
+    padding-bottom:90px !important;
+    box-sizing:border-box !important;
+}
+
+.mission-data-grid{
+    position:relative !important;
+    display:grid !important;
+    grid-template-columns:repeat(4,1fr) !important;
+    gap:10px !important;
+
+    width:100% !important;
+    margin-top:50px !important;
+}
+
+.mission-nav{
+    position:absolute !important;
+
+    left:45px !important;
+    right:45px !important;
+    bottom:25px !important;
+
+    width:auto !important;
+
+    display:grid !important;
+    grid-template-columns:repeat(4,1fr) !important;
+    gap:8px !important;
+
+    margin:0 !important;
+    padding:0 !important;
+
+    z-index:100 !important;
+}
+/* =========================================
+   MEMORY FILES — TRUE FULL SCREEN OVERRIDE
+========================================= */
+
+#memoryFiles{
+    position:fixed !important;
+    inset:0 !important;
+
+    width:100vw !important;
+    height:100vh !important;
+
+    max-width:none !important;
+    max-height:none !important;
+
+    margin:0 !important;
+    padding:0 !important;
+
+    overflow-y:auto !important;
+    overflow-x:hidden !important;
+
+    z-index:500 !important;
+
+    background:#08031b;
+}
+
+/* Full-screen archive content */
+#memoryFiles .memory-files-content{
+    position:relative;
+    width:100% !important;
+    min-height:100vh;
+
+    max-width:none !important;
+    margin:0 !important;
+
+    padding:80px clamp(30px,7vw,120px);
+    box-sizing:border-box;
+}
+
+/* Cards use the available screen */
+#memoryFiles .memory-files-grid{
+    width:100%;
+    max-width:1400px;
+    margin:50px auto 0;
+
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}#throughMyEyes{
+    position:fixed !important;
+    inset:0 !important;
+
+    width:100vw !important;
+    height:100vh !important;
+
+    max-width:none !important;
+    margin:0 !important;
+
+    overflow-y:auto !important;
+    overflow-x:hidden !important;
+
+    z-index:1000 !important;
+
+    background:#05000f;
+
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+}
+
+#throughMyEyes.open{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+}
+#throughMyEyes .memory-fragments{
+    width:min(1400px,90%);
+    margin:0 auto;
+    padding:100px 0 160px;
+}
+
+#throughMyEyes .memory-fragment{
+    width:100%;
+    min-height:80vh;
+
+    display:grid;
+    grid-template-columns:1.2fr 0.8fr;
+    align-items:center;
+    gap:70px;
+}
+
+#throughMyEyes .memory-photo,
+#throughMyEyes .memory-video{
+    width:100%;
+}
+
+#throughMyEyes img,
+#throughMyEyes video{
+    display:block;
+    width:100%;
+    max-height:80vh;
+    object-fit:contain;
+}
+@media(max-width:800px){
+
+    #memoryFiles .memory-files-grid{
+        grid-template-columns:1fr;
+    }
+
+    #throughMyEyes .memory-fragment,
+    #throughMyEyes .memory-fragment.reverse{
+        grid-template-columns:1fr;
+        min-height:auto;
+        gap:30px;
+        padding:60px 0;
+    }
+}
+
+/* =========================================
+   THROUGH MY EYES — OPEN STATE FIX
+========================================= */
+
+#throughMyEyes.open{
+    display:block !important;
+    opacity:1 !important;
+    visibility:visible !important;
+    pointer-events:auto !important;
+}
+
+#throughMyEyes.open .memory-experience-topbar,
+#throughMyEyes.open .memory-experience-intro{
+    opacity:1 !important;
+    visibility:visible !important;
+    transform:none !important;
+    pointer-events:auto !important;
+}
+/* ===============================
+   MEMORY MEDIA — PHOTOS + VIDEOS
+================================ */
+
+.memory-photo,
+.memory-video-wrap {
+    width: 100%;
+    min-height: 500px;
+    overflow: hidden;
+    border-radius: 18px;
+    background: rgba(0, 0, 0, 0.35);
+}
+
+.memory-photo img,
+.memory-video-wrap video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+    .memory-photo,
+    .memory-video-wrap {
+        min-height: 420px;
+    }
+
+    .memory-photo img,
+    .memory-video-wrap video {
+        min-height: 420px;
+    }
+}
+    

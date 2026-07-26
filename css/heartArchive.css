@@ -1,0 +1,440 @@
+.heart-archive{
+
+    position:fixed;
+    inset:0;
+
+    display:none;
+
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+
+    overflow:hidden;
+
+    text-align:center;
+
+    z-index:500;
+
+    background:
+        linear-gradient(
+            rgba(0,0,0,.25),
+            rgba(0,0,0,.75)
+        ),
+        url("https://pub-bf59e4faf5904fc0875492866e65f840.r2.dev/assets/Images/spiderverse.jpg");
+
+    background-size:cover;
+    background-position:center;
+}
+
+.heart-archive > *{
+
+    position:relative;
+    z-index:1;
+
+}
+
+.heart-content{
+
+    position:relative;
+
+    z-index:2;
+
+    width:min(850px,90vw);
+
+    text-align:center;
+
+    color:rgb(241, 8, 233);
+
+}
+
+.heart-poem.hidden{
+
+    display:none;
+
+}
+.heart-container{
+
+    width:min(900px,90vw);
+
+    margin:auto;
+
+    text-align:center;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+}
+
+.entry-number{
+
+    font-size:15px;
+
+    letter-spacing:8px;
+
+    text-transform:uppercase;
+
+    color:#9ef8e3;
+
+    margin-bottom:25px;
+
+}
+
+#entryTitle{
+
+    font-size:clamp(4rem,7vw,7rem);
+
+    font-weight:800;
+
+    line-height:1;
+
+    letter-spacing:-2px;
+
+    margin-bottom:20px;
+
+}
+
+.entry-date{
+
+    font-size:18px;
+
+    letter-spacing:3px;
+
+    color:#d9d9d9;
+
+    margin-bottom:60px;
+
+}
+
+.poem-content{
+
+    max-width:900px;
+
+    font-size:1.45rem;
+
+    line-height:2.2;
+
+    white-space:pre-line;
+
+    margin-bottom:70px;
+
+}
+
+.heart-controls{
+
+    width:100%;
+    max-width:850px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-top:60px;
+
+}
+
+.heart-controls button{
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    padding:16px 34px;
+
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:999px;
+
+    background:rgba(15,15,20,.55);
+    backdrop-filter:blur(14px);
+
+    color:#F5F5F5;
+
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:3px;
+    text-transform:uppercase;
+
+    cursor:pointer;
+
+    transition:
+        background .35s,
+        border-color .35s,
+        transform .35s,
+        box-shadow .35s;
+
+}
+
+.heart-controls button:hover{
+
+    transform:translateY(-2px);
+
+    border-color:rgba(255,255,255,.35);
+
+    background:rgba(30,30,35,.8);
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,.35);
+
+}
+
+.heart-controls button:active{
+
+    transform:translateY(0);
+
+}
+
+#poemCounter{
+
+    font-size:13px;
+
+    letter-spacing:4px;
+
+    color:rgba(255,255,255,.75);
+
+    text-transform:uppercase;
+
+}
+
+.heart-back-button{
+
+    background:transparent;
+
+    border:1px solid rgba(233, 7, 203, 0.4);
+
+    color:rgba(229, 9, 196, 0.873);
+
+    padding:12px 24px;
+
+    border-radius:30px;
+
+    transition:.3s;
+
+}
+.heart-back-button:hover{
+
+    background:rgb(239, 5, 239);
+
+    color:black;
+
+}   
+#beginHeartArchive{
+
+    margin-top:50px;
+
+    padding:18px 55px;
+
+    border:none;
+
+    border-radius:50px;
+
+    background:rgb(232, 6, 228);
+
+    color:black;
+
+    font-weight:700;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+    transition:.35s;
+
+}
+#beginHeartArchive:hover{
+
+    transform:scale(1.06);
+
+}
+h1{
+
+    animation:fadeUp 1s ease forwards;
+
+}
+
+.heart-intro-text{
+
+    animation:fadeUp 1.4s ease forwards;
+
+}
+
+#beginHeartArchive{
+
+    animation:fadeUp 1.8s ease forwards;
+
+}
+.heart-archive.open{
+
+    display:flex;
+
+}
+/* ===============================
+   CHAPTER TRANSITIONS
+================================ */
+
+.mission-interface{
+
+    transition:
+        opacity .8s ease,
+        transform .8s ease,
+        filter .8s ease;
+
+}
+
+.mission-interface.fade-out{
+
+    opacity:0;
+
+    transform:scale(.96);
+
+    filter:blur(8px);
+
+    pointer-events:none;
+
+}
+
+
+/* Heart Archive */
+
+.heart-archive{
+
+    display:none;
+
+    opacity:0;
+
+}
+
+.heart-archive.open{
+
+    display:flex;
+
+    animation:heartArchiveFade 1s ease forwards;
+
+}
+
+
+@keyframes heartArchiveFade{
+
+    0%{
+
+        opacity:0;
+
+        transform:scale(1.03);
+
+        filter:blur(10px);
+
+    }
+
+    100%{
+
+        opacity:1;
+
+        transform:scale(1);
+
+        filter:blur(0);
+
+    }
+
+}
+.heart-archive,
+.heart-archive.closing{
+    display:none;
+    opacity:0;
+}
+
+.heart-archive.open,
+.heart-archive.closing{
+    display:flex; /* both need to render for the fade to be visible */
+}
+
+.heart-archive.open{
+    animation: heartArchiveFade .9s ease forwards;
+}
+
+.heart-archive.closing{
+    animation: heartArchiveFadeOut .8s ease forwards;
+}
+
+@keyframes heartArchiveFadeOut{
+    0%{
+        opacity:1;
+        transform:scale(1);
+        filter:blur(0);
+    }
+    100%{
+        opacity:0;
+        transform:scale(1.03);
+        filter:blur(10px);
+    }
+}
+.close-heart{
+
+    position:fixed; /* anchors to the viewport, not the centered container */
+
+    top:32px;
+    left:32px;
+
+    z-index:20; /* sits above the poem text and background */
+
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+
+    padding:14px 32px;
+
+    border:1px solid rgba(255,255,255,.35);
+    border-radius:999px;
+
+    background:rgba(0,0,0,.35);
+    backdrop-filter:blur(6px);
+
+    color:#fff;
+
+    font-family:"Space Mono",monospace;
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+
+    cursor:pointer;
+
+    transition:.35s ease;
+
+}
+
+.close-heart::before{
+
+    content:"←";
+
+    font-size:16px;
+
+    transition:transform .3s ease;
+
+}
+
+.close-heart:hover{
+
+    background:rgba(255,255,255,.9);
+    color:#000;
+
+    border-color:transparent;
+
+    transform:translateY(-2px);
+
+    box-shadow:0 8px 24px rgba(0,0,0,.35);
+
+}
+
+.close-heart:hover::before{
+
+    transform:translateX(-4px);
+
+}
+
+.close-heart:active{
+
+    transform:translateY(0) scale(.97) translateY(-2px); /* keeps hover lift while pressed */
+
+}

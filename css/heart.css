@@ -1,0 +1,40 @@
+/* ===========================
+   HEART
+=========================== */
+
+#nicknameHeart{
+
+    position:relative;
+
+    width:650px;
+
+    height:650px;
+
+    margin:40px auto;
+
+    overflow:visible;
+
+}
+
+.heart-word{
+
+    position:absolute;
+
+    left:0;
+    top:0;
+
+    transform:translate(-50%,-50%);
+
+    color:#ff69b4;
+
+    font-size:14px;
+
+    font-weight:bold;
+
+    white-space:nowrap;
+
+    text-shadow:
+        0 0 8px hotpink,
+        0 0 18px deeppink;
+
+}

@@ -1,0 +1,241 @@
+    /* ===========================
+    ANIMATIONS
+    =========================== */
+
+    @keyframes pulse{
+
+        0%{
+            opacity:.5;
+        }
+
+        50%{
+            opacity:1;
+        }
+
+        100%{
+            opacity:.5;
+        }
+
+    }
+
+    @keyframes heartbeat{
+
+        0%{
+
+            transform:
+            translate(-50%,-50%)
+            scale(1);
+
+        }
+
+        15%{
+
+            transform:
+            translate(-50%,-50%)
+            scale(1.12);
+
+        }
+
+        30%{
+
+            transform:
+            translate(-50%,-50%)
+            scale(1);
+
+        }
+
+        45%{
+
+            transform:
+            translate(-50%,-50%)
+            scale(1.16);
+
+        }
+
+        100%{
+
+            transform:
+            translate(-50%,-50%)
+            scale(1);
+
+        }
+
+    }
+
+    @keyframes floatWords{
+
+        0%{
+
+            filter:brightness(1);
+
+        }
+
+        50%{
+
+            filter:brightness(1.6);
+
+        }
+
+        100%{
+
+            filter:brightness(1);
+
+        }
+
+    }
+
+    @keyframes glitch{
+
+        0%{
+            transform:translate(0);
+            filter:hue-rotate(0deg);
+        }
+
+        20%{
+            transform:translate(-3px,2px);
+        }
+
+        40%{
+            transform:translate(3px,-2px);
+        }
+
+        60%{
+            transform:translate(-2px,-3px);
+        }
+
+        80%{
+            transform:translate(2px,3px);
+        }
+
+        100%{
+            transform:translate(0);
+            filter:hue-rotate(12deg);
+        }
+
+    }
+
+    @keyframes whiteFlash{
+
+        0%{
+            filter:brightness(1);
+        }
+
+        50%{
+            filter:brightness(4);
+        }
+
+        100%{
+            filter:brightness(1);
+        }
+
+    }
+
+    @keyframes awaken{
+
+        0%,100%{
+            transform:translateX(0);
+        }
+
+        20%{
+            transform:translateX(-2px);
+        }
+
+        40%{
+            transform:translateX(2px);
+        }
+
+        60%{
+            transform:translateX(-1px);
+        }
+
+        80%{
+            transform:translateX(1px);
+        }
+
+    }
+
+    @keyframes pinkBloom{
+
+        0%{
+
+            box-shadow:0 0 0 #ff4da6;
+
+        }
+
+        100%{
+
+            box-shadow:
+                0 0 90px #ff4da6,
+                0 0 180px #ff4da6;
+
+        }
+
+    }
+
+    @keyframes pinkTakeover{
+
+        0%{
+
+            background:#000;
+
+            box-shadow:none;
+
+        }
+
+        25%{
+
+            background:#14000b;
+
+        }
+
+        50%{
+
+            background:#320018;
+
+        }
+
+        75%{
+
+            background:#5d002d;
+
+        }
+
+        100%{
+
+            background:#ff2d8d;
+
+            box-shadow:
+                0 0 220px rgba(255,45,141,.9);
+
+        }
+
+    }
+    /* ===========================
+   ANIMATION CLASSES
+=========================== */
+
+.pink-mode{
+    animation: pinkTakeover 3.5s forwards;
+}
+
+.glitch{
+    animation: glitch .12s linear infinite;
+}
+
+.flash{
+    animation: whiteFlash .25s;
+}
+
+.awaken{
+    animation: awaken .35s infinite;
+}
+
+.bloom{
+    animation: pinkBloom 2s forwards;
+}
+
+.heart-word{
+    animation:
+        heartbeat 2.2s ease-in-out infinite,
+        floatWords 5s ease-in-out infinite;
+}

@@ -1,0 +1,322 @@
+/* ===========================
+   TERMINAL
+=========================== */
+
+.verify-screen{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    background:#040404;
+
+    padding:40px;
+
+}
+
+.terminal-window{
+
+    width:min(900px,95vw);
+
+    background:#0b0b0b;
+
+    border:1px solid #2e2e2e;
+
+    border-radius:12px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 0 30px rgba(255,255,255,.05),
+        0 0 120px rgba(0,255,255,.03);
+
+}
+
+.terminal-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:18px 24px;
+
+    border-bottom:1px solid #2a2a2a;
+
+    background:#111;
+
+    font-family:"Space Mono";
+
+    font-size:13px;
+
+    letter-spacing:2px;
+
+}
+
+.terminal-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+.status-light{
+
+    width:10px;
+    height:10px;
+
+    border-radius:50%;
+
+    background:#2bff66;
+
+    box-shadow:0 0 15px #2bff66;
+
+    animation:pulse 1.5s infinite;
+
+}
+
+.terminal-body{
+
+    padding:50px;
+
+}
+
+.terminal-version{
+
+    color:#7c7c7c;
+
+    font-family:"Space Mono";
+
+    letter-spacing:3px;
+
+}
+
+.terminal-clearance{
+
+    margin-top:8px;
+
+    color:#57d9ff;
+
+    font-family:"Space Mono";
+
+}
+
+.divider{
+
+    height:1px;
+
+    background:#252525;
+
+    margin:30px 0;
+
+}
+
+h1{
+
+    font-size:38px;
+
+    margin-bottom:18px;
+
+    font-weight:700;
+
+}
+
+label{
+
+    display:block;
+
+    margin-bottom:15px;
+
+    font-family:"Space Mono";
+
+    letter-spacing:2px;
+
+}
+
+.terminal-description{
+
+    color:#8f8f8f;
+
+    line-height:1.8;
+
+    margin-bottom:40px;
+
+}
+
+.terminal-input{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    border:1px solid #2b2b2b;
+
+    background:#070707;
+
+    padding:18px;
+
+}
+
+.prompt{
+
+    color:#57d9ff;
+
+    font-size:20px;
+
+}
+
+.terminal-input input{
+
+    flex:1;
+
+    background:none;
+
+    border:none;
+
+    outline:none;
+
+    color:white;
+
+    font-size:18px;
+
+    font-family:"Space Mono";
+
+}
+
+.status-box{
+
+    margin-top:30px;
+
+}
+
+.status-title{
+
+    display:block;
+
+    color:#57d9ff;
+
+    font-family:"Space Mono";
+
+    margin-bottom:10px;
+
+}
+
+.access-button{
+
+    margin-top:40px;
+
+    width:100%;
+
+    padding:18px;
+
+    border:none;
+
+    background:#111;
+
+    color:white;
+
+    cursor:pointer;
+
+    letter-spacing:3px;
+
+    font-family:"Space Mono";
+
+    transition:.3s;
+
+}
+
+.access-button:hover{
+
+    background:#57d9ff;
+
+    color:#000;
+
+    transform:translateY(-2px);
+
+}
+
+/* Pink Mode */
+
+.pink-mode{
+
+    transition:1.2s ease;
+
+}
+
+.pink-mode .terminal-window{
+
+    border:1px solid #ff5fb8;
+
+    box-shadow:
+        0 0 25px rgba(255,95,184,.45),
+        0 0 70px rgba(255,95,184,.30),
+        0 0 140px rgba(255,95,184,.18);
+
+}
+.pink-mode{
+
+    transition:1.2s ease;
+    animation:pinkTakeover 3.5s forwards;
+
+}
+
+.pink-mode .terminal-header{
+
+    background:#160912;
+
+}
+
+.pink-mode h1,
+.pink-mode p,
+.pink-mode label,
+.pink-mode span,
+.pink-mode button{
+
+    color:#ff84cb;
+
+}
+
+.pink-mode .terminal-input{
+
+    border-color:#ff5fb8;
+
+}
+
+.pink-mode .prompt{
+
+    color:#ff5fb8;
+
+}
+
+.pink-mode .status-light{
+
+    background:#ff5fb8;
+
+    box-shadow:0 0 18px #ff5fb8;
+
+}
+
+.pink-mode .access-button{
+
+    background:#ff5fb8;
+    color:#111;
+
+}
+
+.pink-mode .terminal-version,
+.pink-mode .terminal-clearance{
+
+    color:#ffb4df;
+
+}

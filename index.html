@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Oreo</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/intro.css">
+    <link rel="stylesheet" href="css/terminal.css">
+    <link rel="stylesheet" href="css/mission.css">
+    <link rel="stylesheet" href="css/missionRoom.css">
+    <link rel="stylesheet" href="css/heart.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/heartIntro.css">
+    <link rel="stylesheet" href="css/transition.css">
+    <link rel="stylesheet" href="css/ourWorld.css">
+    <link rel="stylesheet" href="css/heartArchive.css">
+    <link rel="stylesheet" href="css/emotionalDatabase.css">
+    <link rel="stylesheet" href="css/emergencyMode.css">
+
+</head>
+
+<body>
+
+<canvas id="signalCanvas"></canvas>
+
+<main>
+
+    <!-- INTRO -->
+    <section id="introSequence" class="intro-sequence">
+
+        <div id="startScreen" class="start-screen">
+
+            <h1>PROJECT OREO</h1>
+
+            <p>SECURE IMF TERMINAL</p>
+
+            <div class="start-button" id="startButton">
+                CLICK HERE TO BEGIN
+            </div>
+
+        </div>
+
+        <p id="introText" class="intro-text"></p>
+
+    </section>
+
+    <!-- LOGIN -->
+    <section id="verifyScreen" class="verify-screen hidden">
+
+        <div class="terminal-window">
+
+            <div class="terminal-header">
+
+                <div class="terminal-left">
+                    <span class="status-light"></span>
+                    <span>IMF SECURE TERMINAL</span>
+                </div>
+
+                <div class="terminal-right">
+                    ENCRYPTION ACTIVE
+                </div>
+
+            </div>
+
+            <div class="terminal-body">
+
+                <p class="terminal-version">
+                    PROJECT OREO
+                </p>
+
+                <p class="terminal-clearance">
+                    SECURITY CLEARANCE : LEVEL 10
+                </p>
+
+                <div class="divider"></div>
+
+                <h1>MISSION IDENTIFICATION</h1>
+
+                <p class="terminal-description">
+                    Only one mission alias has ever been accepted.
+                </p>
+
+                <form id="accessForm">
+
+                    <label>
+                        Mission Alias
+                    </label>
+
+                    <div class="terminal-input">
+
+                        <span class="prompt">&gt;</span>
+
+                        <input
+                            id="nameInput"
+                            type="text"
+                            autocomplete="off"
+                            spellcheck="false"
+                            placeholder="What do I call you?"
+                        >
+
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <div class="status-box">
+
+                        <span class="status-title">
+                            STATUS
+                        </span>
+
+                        <p id="verifyStatus">
+                            Awaiting authorised mission alias...
+                        </p>
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="access-button">
+
+                        AUTHORISE ACCESS
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- HEART INTRO -->
+    <section id="heartIntro" class="heart-intro hidden">
+
+        <div id="heartWords"></div>
+
+        <div id="heartParticles"></div>
+
+        <p id="heartCaption"></p>
+
+    </section>
+
+    <!-- TRANSITION -->
+    <div id="transitionLayer" class="hidden"></div>
+
+    <!-- MISSION ROOM -->
+    <section id="missionRoom" class="mission-room hidden">
+
+        <!-- ENTERGALACTIC BACKGROUND -->
+        <div id="entergalacticBackground"></div>
+
+        <!-- AMBIENT BACKGROUND -->
+        <div class="mission-ambient"></div>
+
+        <!-- ACT 1: ARRIVAL / BOOT SEQUENCE -->
+        <div id="bootSequence" class="boot-sequence">
+
+            <div class="boot-terminal">
+
+                <p class="boot-label">
+                    PROJECT OREO // SECURE MEMORY ARCHIVE
+                </p>
+
+                <div id="terminalBoot"></div>
+
+                <div id="bootProgressWrap" class="boot-progress-wrap hidden">
+
+                    <div class="boot-progress-track">
+                        <div id="bootProgress" class="boot-progress"></div>
+                    </div>
+
+                    <span id="bootPercentage">0%</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ===============================
+             MAIN MISSION INTERFACE
+        ================================ -->
+        <div id="missionInterface" class="mission-interface">
+
+            <!-- TOP BAR -->
+            <header class="mission-topbar">
+
+                <div>
+                    <span class="system-dot"></span>
+                    PROJECT OREO
+                </div>
+
+                <div class="mission-status">
+                    MEMORY ARCHIVE // ONLINE
+                </div>
+
+            </header>
+
+
+            <!-- MAIN COMMAND AREA -->
+            <main class="mission-command">
+
+                <p class="mission-eyebrow">
+                    MISSION CHANNEL UNLOCKED
+                </p>
+
+                <h1>
+                    Welcome home,
+                    <span id="missionAgentName">
+                        pink soldier.
+                    </span>
+                </h1>
+
+                <p class="mission-description">
+                    This message does not self-destruct.
+                    This archive was built to stay,
+                    just like my love for you.
+                </p>
+
+
+                <!-- DATA CARDS -->
+                <div class="mission-data-grid">
+
+                    <div class="mission-data-card">
+                        <span>MISSION</span>
+                        <strong>LOVING YOU</strong>
+                    </div>
+
+                    <div class="mission-data-card">
+                        <span>PRIORITY</span>
+                        <strong>HIGH</strong>
+                    </div>
+
+                    <div class="mission-data-card">
+                        <span>STATUS</span>
+                        <strong>GIRLFRIEND</strong>
+                    </div>
+
+                    <div class="mission-data-card">
+                        <span>ARCHIVE</span>
+                        <strong>UNLOCKED</strong>
+                    </div>
+
+                </div>
+
+            </main>
+
+
+            <!-- NAVIGATION -->
+            
+        <nav class="mission-nav">
+
+                <button
+                id="openHeartArchive"
+                type="button">
+                HEART ARCHIVE
+                </button>
+
+                <button
+                    id="openMemoryFiles"
+                    type="button"
+                >
+                    MEMORY FILES
+                </button>
+
+                <button 
+                id="openEmotionalDatabase" 
+                type="button">
+                 EMOTIONAL DATABASE
+                </button>
+
+                <button 
+                id="openEmergencyMode"
+                type="button">
+                    EMERGENCY MODE
+                </button>
+
+            </nav>
+
+        </div>
+
+
+        <!-- ===============================
+             MEMORY FILES ARCHIVE
+        ================================ -->
+        <section
+            id="memoryFiles"
+            class="memory-files"
+            aria-hidden="true"
+        >
+
+            <!-- ARCHIVE TOP BAR -->
+            <header class="memory-files-topbar">
+
+                <button
+                    id="closeMemoryFiles"
+                    class="memory-back-button"
+                    type="button"
+                >
+                    ← RETURN TO MISSION ROOM
+                </button>
+
+                <div class="memory-system-status">
+                    <span class="system-dot"></span>
+                    MEMORY DATABASE // ACCESS GRANTED
+                </div>
+
+            </header>
+
+
+            <!-- ARCHIVE HEADER -->
+            <div class="memory-files-header">
+
+                <p class="memory-files-eyebrow">
+                    PROJECT OREO // CLASSIFIED ARCHIVE
+                </p>
+
+                <h2>
+                    MEMORY
+                    <span>FILES.</span>
+                </h2>
+
+                <p>
+                    Every moment archived.
+                    Every version of us preserved.
+                </p>
+
+            </div>
+
+
+            <!-- MEMORY GRID -->
+            <div class="memory-grid">
+
+                <button
+                    id="openThroughMyEyes"
+                    class="memory-card"
+                    type="button"
+                    data-memory="through-my-eyes"
+                >
+                    <span class="memory-number">
+                        FILE // 001
+                    </span>
+
+                    <div class="memory-card-content">
+                        <p>ARCHIVE STATUS // DECRYPTED</p>
+
+                        <h3>YOU, THROUGH MY EYES</h3>
+
+                        <span>
+                            My beautiful brown eyed queen.
+                        </span>
+                    </div>
+                </button>
+
+                <button
+                    id="openOurWorld"
+                    class="memory-card"
+                    type="button"
+                    data-memory="02"
+                >
+                    <span class="memory-number">
+                        FILE // 002
+                    </span>
+
+                    <div class="memory-card-content">
+                        <p>ARCHIVE STATUS // DECRYPTED</p>
+                        <h3>OUR WORLD</h3>
+                        <span>
+                            The moments that became ours.
+                        </span>
+                    </div>
+                </button>
+
+            </div>
+        </section>
+
+
+        <!-- ===============================
+             FILE 001 — YOU, THROUGH MY EYES
+        ================================ -->
+        <section
+            id="throughMyEyes"
+            class="memory-experience"
+            aria-hidden="true"
+        >
+
+            <!-- TOP BAR -->
+            <header class="memory-experience-topbar">
+
+                <button
+                    id="closeThroughMyEyes"
+                    class="memory-back-button"
+                    type="button"
+                >
+                    ← RETURN TO MEMORY FILES
+                </button>
+
+                <div class="memory-system-status">
+                    FILE // 001 // DECRYPTED
+                </div>
+
+            </header>
+
+
+            <!-- FILE INTRO -->
+            <div class="memory-experience-intro">
+
+                <p class="memory-files-eyebrow">
+                    PROJECT OREO // VISUAL MEMORY ARCHIVE
+                </p>
+
+                <h2>
+                    YOU,
+                    <span>THROUGH MY EYES.</span>
+                </h2>
+
+                <p class="memory-opening-message">
+                    You have spent your whole life seeing yourself
+                    through mirrors, photographs and your own thoughts.
+                    <br><br>
+
+                    But you have never seen yourself through my eyes.
+                    <br><br>
+
+                    So I kept some evidence.
+                </p>
+
+                <button
+                    id="beginMemoryReconstruction"
+                    class="begin-memory-button"
+                    type="button"
+                >
+                    RECONSTRUCT MEMORY FILE
+                </button>
+
+            </div>
+
+
+            <!-- RECONSTRUCTION SCREEN -->
+            <div
+                id="memoryReconstruction"
+                class="memory-reconstruction"
+            >
+                <p id="reconstructionText">
+                    ACCESSING VISUAL MEMORY...
+                </p>
+
+                <div class="reconstruction-line"></div>
+            </div>
+
+
+            <!-- MEMORY FRAGMENTS -->
+            <div
+                id="memoryFragments"
+                class="memory-fragments"
+            >
+
+                <!-- FRAGMENT 001 — PHOTO -->
+                <article class="memory-fragment">
+
+                    <div class="memory-photo">
+
+                        <img
+                            src="https://pub-bf59e4faf5904fc0875492866e65f840.r2.dev/assets/Images/her-01.jpg.JPG"
+                            alt="A memory of her"
+                        >
+
+                    </div>
+
+                    <div class="memory-fragment-copy">
+
+                        <span>FRAGMENT // 001</span>
+
+                        <h3>
+                            The way I see you.
+                        </h3>
+
+                        <p>
+                            You are truly breathtaking, a glimpse of perfection.
+                            How can one woman hold such beauty?
+
+                            The answer is simple.
+
+                            You are a gift from God,
+                            and I am forever grateful for you.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <!-- FRAGMENT 002 — PHOTO -->
+                <article class="memory-fragment reverse">
+
+                    <div class="memory-photo">
+
+                        <img
+                            src="https://pub-bf59e4faf5904fc0875492866e65f840.r2.dev/assets/Images/her-02.JPG"
+                            alt="A memory of her"
+                        >
+
+                    </div>
+
+                    <div class="memory-fragment-copy">
+
+                        <span>FRAGMENT // 002</span>
+
+                        <h3>
+                            That smile.
+                        </h3>
+
+                        <p>
+                           That smile that can make a bad day bright.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <!-- FRAGMENT 003 — PHOTO -->
+                <article class="memory-fragment">
+
+                    <div class="memory-photo">
+
+                        <img
+                            src="https://pub-bf59e4faf5904fc0875492866e65f840.r2.dev/assets/Images/her-03.JPG"
+                            alt="A memory of her"
+                        >
+
+                    </div>
+
+                    <div class="memory-fragment-copy">
+
+                        <span>FRAGMENT // 003</span>
+
+                        <h3>
+                            You probably just saw a picture.
+                        </h3>
+
+                        <p>
+                            I saw you, Songs of Solomon 4:7 "You are altogether beautiful, my darling; there is no flaw in you".
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <!-- FRAGMENT 004 — VIDEO -->
+                <article class="memory-fragment reverse video-fragment">
+
+                    <div class="memory-photo memory-video">
+
+                        <video
+                            src="https://pub-bf59e4faf5904fc0875492866e65f840.r2.dev/assets/videos/her-01.mp4"
+                            controls
+                            playsinline
+                            preload="metadata"
+                        ></video>
+
+                    </div>
+
+                    <div class="memory-fragment-copy">
+
+                        <span>FRAGMENT // 004 // MOTION FILE</span>
+
+                        <h3>
+                            Pictures were never enough.
+                        </h3>
+
+                        <p>
+                            Because sometimes a picture cannot capture you properly.
+
+                            The way you move.
+                            The way you laugh.
+                            The way your entire face changes when you're happy.
+
+                            Some versions of you were meant to be remembered in motion.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <!-- FRAGMENT 005 — PHOTO -->
+                <article class="memory-fragment">
+
+                    <div class="memory-photo">
+
+                        <img
+                            src="https://pub-bf59e4faf5904fc0875492866e65f840.r2.dev/assets/Images/her-04.JPG"
+                            alt="A memory of her"
+                        >
+
+                    </div>
+
+                    <div class="memory-fragment-copy">
+
+                        <span>FRAGMENT // 005</span>
+
+                        <h3>
+                            A picture you may have forgotten.
+                        </h3>
+
+                        <p>
+                            My cute little baby🥹.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <!-- FRAGMENT 006 — VIDEO -->
+                <article class="memory-fragment reverse video-fragment">
+
+                    <div class="memory-photo memory-video">
+
+                        <video
+                            src="https://pub-bf59e4faf5904fc0875492866e65f840.r2.dev/assets/videos/her-02.mp4"
+                            controls
+                            playsinline
+                            preload="metadata"
+                        ></video>
+
+                    </div>
+
+                    <div class="memory-fragment-copy">
+
+                        <span>FRAGMENT // 006 // MOTION FILE</span>
+
+                        <h3>
+                            This is so completely you.
+                        </h3>
+
+                        <p>
+                            HAVE YOU SEEN MY WIFE😩.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <!-- FRAGMENT 007 — PHOTO -->
+                <article class="memory-fragment">
+
+                    <div class="memory-photo">
+
+                        <img
+                            src="https://pub-bf59e4faf5904fc0875492866e65f840.r2.dev/assets/Images/her-05.JPG"
+                            alt="A memory of her"
+                        >
+
+                    </div>
+
+                    <div class="memory-fragment-copy">
+
+                        <span>FRAGMENT // 007</span>
+
+                        <h3>
+                            Okay... this one is unfair.
+                        </h3>
+
+                        <p>
+                            One word — STUNNING.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <!-- FRAGMENT 008 — PHOTO -->
+                <article class="memory-fragment reverse">
+
+                    <div class="memory-photo">
+
+                        <img
+                            src="https://pub-bf59e4faf5904fc0875492866e65f840.r2.dev/assets/Images/her-06.jpg.JPG"
+                            alt="A memory of her"
+                        >
+
+                    </div>
+
+                    <div class="memory-fragment-copy">
+
+                        <span>FRAGMENT // 008</span>
+
+                        <h3>
+                            And then there's this version of you.
+                        </h3>
+
+                        <p>
+                            The unserious one.
+                            The weird one.
+                            The one that makes me laugh.
+                            The butabika butterfly.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <!-- FRAGMENT 009 — VIDEO -->
+                <article class="memory-fragment video-fragment">
+
+                    <div class="memory-photo memory-video">
+
+                        <video
+                            src="https://pub-bf59e4faf5904fc0875492866e65f840.r2.dev/assets/videos/her-03.mp4"
+                            controls
+                            playsinline
+                            preload="metadata"
+                        ></video>
+
+                    </div>
+
+                    <div class="memory-fragment-copy">
+
+                        <span>FRAGMENT // 009 // MOTION FILE</span>
+
+                        <h3>
+                            A moment I wanted to keep.
+                        </h3>
+
+                        <p>
+                            When you opened your heart to me.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <!-- FRAGMENT 010 — PHOTO -->
+                <article class="memory-fragment reverse">
+
+                    <div class="memory-photo">
+
+                        <img
+                            src="https://pub-bf59e4faf5904fc0875492866e65f840.r2.dev/assets/Images/her-07.JPG"
+                            alt="A memory of her"
+                        >
+
+                    </div>
+
+                    <div class="memory-fragment-copy">
+
+                        <span>FRAGMENT // 010</span>
+
+                        <h3>
+                            Softness looks good on you.
+                        </h3>
+
+                        <p>
+                            A masterpiece.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <!-- FRAGMENT 011 — FAVOURITE -->
+                <article class="memory-fragment favourite-fragment">
+
+                    <div class="memory-photo">
+
+                        <img
+                            src="https://pub-bf59e4faf5904fc0875492866e65f840.r2.dev/assets/Images/favourite.JPG"
+                            alt="One of my favourite pictures of her"
+                        >
+
+                    </div>
+
+                    <div class="memory-fragment-copy">
+
+                        <span>
+                            FRAGMENT // 011 // PRIORITY MEMORY
+                        </span>
+
+                        <h3>
+                            One of my favourites.
+                        </h3>
+
+                        <p>
+                            My absolutely favourite picture of you
+                            I stare at it all day without sleep .
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <!-- FRAGMENT 012 — FINAL VIDEO -->
+                <article class="memory-fragment reverse video-fragment">
+
+                    <div class="memory-photo memory-video">
+
+                        <video
+                            src="https://pub-bf59e4faf5904fc0875492866e65f840.r2.dev/assets/videos/final.mp4"
+                            controls
+                            playsinline
+                            preload="metadata"
+                        ></video>
+
+                    </div>
+
+                    <div class="memory-fragment-copy">
+
+                        <span>
+                            FRAGMENT // 012 // FINAL AVAILABLE RECORDING
+                        </span>
+
+                        <h3>
+                            And somehow, I'm still not done looking at you.
+                        </h3>
+
+                        <p>
+                            My love muffin.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <!-- END OF ARCHIVE -->
+                <article class="memory-fragment final-fragment">
+
+                    <div class="memory-fragment-copy">
+
+                        <span>
+                            END OF AVAILABLE ARCHIVE // FOR NOW
+                        </span>
+
+                        <h3>
+                            And somehow, none of these are enough.
+                        </h3>
+
+                        <p>
+                            Because no photograph, no video,
+                            and no collection of memories could ever
+                            completely show you the way I see you.
+
+                            Maybe that's the problem.
+
+                            You can see these pictures.
+                            You can watch these videos.
+
+                            But only I get to look at you through my eyes.
+                        </p>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- ===============================
+             FILE 002 — OUR WORLD
+             (direct sibling of missionRoom's
+             other sections — no transform/filter
+             ancestors to break position:fixed)
+        ================================ -->
+        <section
+            id="ourWorld"
+            class="our-world-experience"
+            aria-hidden="true"
+        >
+
+            <!-- TOP BAR -->
+            <header class="our-world-topbar">
+
+                <button
+                    id="closeOurWorld"
+                    class="our-world-back-button"
+                    type="button"
+                >
+                    ← RETURN TO MEMORY FILES
+                </button>
+
+                <div class="our-world-status">
+                    FILE // 002 // WORLD COORDINATES FOUND
+                </div>
+
+            </header>
+
+
+            <!-- ===============================
+                 ACT I — INTRO
+            ================================ -->
+
+            <div
+                id="ourWorldIntro"
+                class="our-world-intro"
+            >
+
+                <p class="our-world-eyebrow">
+                    PROJECT OREO // FILE 002
+                </p>
+
+                <h2>
+                    SOMEWHERE ALONG THE WAY,
+                    <span>WE BUILT A WORLD.</span>
+                </h2>
+
+                <p class="our-world-opening">
+                    Not a perfect one.
+                    Not always a quiet one.
+                    <br><br>
+                    But ours.
+                    <br><br>
+                    Built from memories, inside jokes,
+                    chaos, comfort, dreams and two people
+                    who somehow found each other.
+                </p>
+
+                <button
+                    id="enterOurWorld"
+                    class="enter-world-button"
+                    type="button"
+                >
+                    ENTER OUR WORLD
+                </button>
+
+            </div>
+
+
+            <!-- ===============================
+                 ACT II — OUR WORLD UNIVERSE
+                 (this wrapper is required by
+                 js/ourWorld.js — do not remove)
+            ================================ -->
+
+            <div
+                id="ourWorldUniverse"
+                class="our-world-universe"
+            >
+
+                <div class="world-heading">
+
+                    <p>
+                        PROJECT OREO // SHARED UNIVERSE
+                    </p>
+
+                    <h2>
+                        OUR
+                        <span>WORLD.</span>
+                    </h2>
+
+                    <p class="world-instruction">
+                        Every world has places only
+                        its people understand.
+                        <br>
+                        These are ours.
+                    </p>
+
+                </div>
+
+
+                <!-- DESTINATION MAP -->
+                <div class="world-map">
+
+                    <!-- PLANET US -->
+                    <button
+                        id="openPlanetUs"
+                        class="world-destination planet-us"
+                        type="button"
+                    >
+
+                        <span class="destination-orbit"></span>
+
+                        <span class="destination-planet"></span>
+
+                        <span class="destination-label">
+
+                            <small>COORDINATE // 01</small>
+
+                            <strong>PLANET US</strong>
+
+                            <em>POPULATION : 2</em>
+
+                        </span>
+
+                    </button>
+
+
+                    <!-- FUTURE -->
+                    <button
+                        id="openTheFuture"
+                        class="world-destination the-future"
+                        type="button"
+                    >
+
+                        <span class="destination-orbit"></span>
+
+                        <span class="destination-planet"></span>
+
+                        <span class="destination-label">
+
+                            <small>COORDINATE // 02</small>
+
+                            <strong>THE FUTURE</strong>
+
+                            <em>STATUS : STILL BEING WRITTEN</em>
+
+                        </span>
+
+                    </button>
+
+                </div>
+
+
+                <!-- PLANET US -->
+                <section
+                    id="planetUsExperience"
+                    class="world-location"
+                    aria-hidden="true"
+                >
+
+                    <button
+                        class="return-to-world"
+                        type="button"
+                    >
+                        ← RETURN TO OUR WORLD
+                    </button>
+
+                    <div class="location-content">
+
+                        <p class="location-coordinate">
+                            COORDINATE // 01
+                        </p>
+
+                        <h2>
+                            PLANET
+                            <span>US.</span>
+                        </h2>
+
+                        <p class="location-intro">
+                            Population : 2.
+                            <br><br>
+                            Welcome home.
+                            This planet contains but a fraction of the happiness we've shared.
+                            Choose a district.
+                        </p>
+
+                    </div>
+
+                    <!-- All three districts live in ONE grid.
+                         Picture Love / Video Love open straight
+                         into the Memory Viewer lightbox; Chaos
+                         District opens its own sub-page first. -->
+                    <div class="district-grid">
+
+                        <button
+                            id="openPictureLove"
+                            class="district-card"
+                            type="button"
+                        >
+                            <span>📷</span>
+                            <h3>Picture Love</h3>
+                            <p>Every picture we've taken.</p>
+                        </button>
+
+                        <button
+                            id="openVideoLove"
+                            class="district-card"
+                            type="button"
+                        >
+                            <span>🎥</span>
+                            <h3>Video Love</h3>
+                            <p>Every video together.</p>
+                        </button>
+
+                        <button
+                            id="openChaosDistrict"
+                            class="district-card"
+                            type="button"
+                        >
+                            <span>😂</span>
+                            <h3>Chaos District</h3>
+                            <p>
+                                The funniest, dumbest,
+                                most unserious version of us.
+                            </p>
+                        </button>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ===============================
+                     CHAOS DISTRICT
+                     Its own sub-page — choosing
+                     Pictures or Videos here opens
+                     the same Memory Viewer lightbox
+                     used by Picture Love / Video Love.
+                ================================ -->
+                <section
+                    id="chaosDistrict"
+                    class="world-location"
+                    aria-hidden="true"
+                >
+
+                    <button
+                        class="return-to-planet"
+                        type="button"
+                    >
+                        ← RETURN TO PLANET US
+                    </button>
+
+                    <div class="location-content">
+
+                        <p class="location-coordinate">
+                            DISTRICT // 003
+                        </p>
+
+                        <h2>
+                            CHAOS
+                            <span>DISTRICT.</span>
+                        </h2>
+
+                        <p class="location-intro">
+                            Probably the most dangerous place
+                            in our universe.
+                        </p>
+
+                    </div>
+
+                    <div class="district-grid">
+
+                        <button
+                            id="openChaosPictures"
+                            class="district-card"
+                            type="button"
+                        >
+                            <span>📸</span>
+                            <h3>Chaos Pictures</h3>
+                            <p>82 memories.</p>
+                        </button>
+
+                        <button
+                            id="openChaosVideos"
+                            class="district-card"
+                            type="button"
+                        >
+                            <span>🎥</span>
+                            <h3>Chaos Videos</h3>
+                            <p>43 memories.</p>
+                        </button>
+
+                    </div>
+
+                </section>
+
+
+                <!-- THE FUTURE — VISION BOARD -->
+                <section
+                    id="futureExperience"
+                    class="world-location"
+                    aria-hidden="true"
+                >
+
+                    <button
+                        class="return-to-world"
+                        type="button"
+                    >
+                        ← RETURN TO OUR WORLD
+                    </button>
+
+                    <div class="future-header">
+
+                        <p class="future-coordinate">
+                            COORDINATE // 02
+                        </p>
+
+                        <h2>
+                            THE
+                            <span>FUTURE.</span>
+                        </h2>
+
+                        <p class="future-intro">
+                            Just places we haven't been,
+                            moments we haven't lived,
+                            and a story still being written.
+                        </p>
+
+                    </div>
+
+                    <!-- Add/remove .future-card blocks as you
+                         make plans real — swap in your own
+                         Images or videos and captions -->
+                    <div class="future-grid">
+
+                        <div class="future-card">
+
+                            <img
+                                src="https://pub-bf59e4faf5904fc0875492866e65f840.r2.dev/assets/future/001.jpg"
+                                alt="A future we haven't lived yet"
+                            >
+
+                            <div class="future-overlay">
+                                <h3>A What if</h3>
+                                <p>Alternate reality.</p>
+                            </div>
+
+                        </div>
+
+                        <div class="future-card">
+<video
+    autoplay
+    loop
+    playsinline
+>
+
+    <source
+        src="https://pub-bf59e4faf5904fc0875492866e65f840.r2.dev/assets/future/001.MP4
+        type="video/MP4"
+    >
+
+</video>
+
+<div class="future-overlay">
+
+    <h3>A home of our own</h3>
+
+    <p>
+        A loss we both experienced and never forgot.
+    </p>
+
+</div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+
+            <!-- ===============================
+                 MEMORY VIEWER
+                 Fullscreen lightbox — opened by
+                 Picture Love / Video Love / Chaos
+                 Pictures / Chaos Videos. Whatever
+                 page was open behind it stays open;
+                 this just fades in on top.
+            ================================ -->
+            <div id="memoryViewer" class="memory-viewer">
+
+                <div id="viewerBackground" class="viewer-background"></div>
+
+                <div class="memory-viewer-header">
+                    <p id="viewerDistrict">PICTURE LOVE</p>
+                    <span id="viewerCounter">1 / 1</span>
+                </div>
+
+                <div id="memoryStage" class="memory-stage"></div>
+
+                <button
+                    id="previousMemory"
+                    class="memory-arrow left"
+                    type="button"
+                >
+                    ‹
+                </button>
+
+                <button
+                    id="nextMemory"
+                    class="memory-arrow right"
+                    type="button"
+                >
+                    ›
+                </button>
+
+                <button
+                    id="closeMemoryViewer"
+                    class="memory-viewer-close"
+                    type="button"
+                >
+                    ← CLOSE
+                </button>
+
+            </div>
+
+        </section>
+
+
+    </section>
+    <!-- /#missionRoom -->
+     <!-- ===============================
+     HEART ARCHIVE
+================================ -->
+
+<section id="heartArchive" class="heart-archive">
+
+    <div class="heart-overlay"></div>
+
+    <div class="heart-container">
+
+        <span id="entryNumber" class="entry-number">
+            ENTRY // 001
+        </span>
+
+        <h1 id="entryTitle">
+            The Beginning
+        </h1>
+
+        <span id="entryDate" class="entry-date">
+            11 August 2025
+        </span>
+
+        <div id="poemContent" class="poem-content"></div>
+
+        <div class="heart-controls">
+
+            <button id="previousPoem">
+                ← PREVIOUS
+            </button>
+
+            <span id="poemCounter">
+               ENTRY 001 / 012
+            </span>
+
+            <button id="nextPoem">
+                NEXT →
+            </button>
+
+        </div>
+
+        <button id="closeHeartArchive" class="close-heart">
+            BACK TO MISSION ROOM
+        </button>
+
+    </div>
+
+</section>
+    <!-- HEART -->
+    <section id="heartZone">
+
+        <div class="section-heading">
+
+            <p class="eyebrow">
+                Princess Dynamtie
+            </p>
+
+            <h2>
+                My love letter to you 😘
+            </h2>
+
+        </div>
+
+        <div class="heart-wrap">
+
+            <div id="nicknameHeart"></div>
+
+        </div>
+
+    </section>
+
+    <!-- Emotional Database -->
+    <section id="emotionalDatabase"
+class="emotional-database"
+aria-hidden="true">
+
+
+<button id="closeDatabase" class="mission-back-button">
+← BACK TO MISSION ROOM
+</button>
+
+
+
+<div class="database-terminal">
+
+
+<p class="database-small">
+PROJECT OREO // EMOTIONAL AI CORE
+</p>
+
+
+<h1>
+OREO <span>AI</span>
+</h1>
+
+
+<div class="ai-status">
+
+STATUS:
+<span>ONLINE</span>
+
+</div>
+
+
+
+<div id="chatWindow" class="chat-window">
+
+
+<div class="ai-message">
+
+OREO AI SYSTEM INITIALIZED...
+<br><br>
+
+Hello Daniella ❤️
+
+I'm here whenever you need encouragement,
+a reminder that you are loved,
+or just someone to talk to when Niza is unavailable.
+
+<br><br>
+
+(OREO your personal AI.❤️)
+
+</div>
+
+
+</div>
+
+
+
+
+<div class="chat-input-container">
+
+
+<input 
+id="userMessage"
+type="text"
+placeholder="Talk to Oreo..."
+autocomplete="off"
+>
+
+
+<button id="sendButton">
+
+SEND
+
+</button>
+
+
+</div>
+
+
+
+</div>
+
+
+</section>
+<!-- ===============================
+     PROJECT OREO — EMERGENCY MODE
+     =============================== -->
+
+<section id="emergencyMode" class="emergency-mode emergency-hidden">
+
+    <button id="closeEmergency" class="emergency-back">
+        ← BACK TO MISSION ROOM
+    </button>
+
+
+    <div class="stars"></div>
+
+
+    <div class="emergency-panel">
+
+        <h1>🚨 EMERGENCY MODE</h1>
+
+        <p>
+            Select what you need right now.
+        </p>
+
+
+        <div class="emergency-options">
+
+
+            <label class="emergency-option">
+
+                <input type="radio" name="emergency" value="I need you right now ❤️">
+
+                <span>
+                    ❤️ I need you right now
+                </span>
+
+            </label>
+
+
+
+            <label class="emergency-option">
+
+                <input type="radio" name="emergency" value="I need comfort 🫂">
+
+                <span>
+                    🫂 I need comfort
+                </span>
+
+            </label>
+
+
+
+            <label class="emergency-option">
+
+                <input type="radio" name="emergency" value="I miss you 🥺">
+
+                <span>
+                    🥺 I miss you
+                </span>
+
+            </label>
+
+
+
+            <label class="emergency-option">
+
+                <input type="radio" name="emergency" value="I need to talk 💬">
+
+                <span>
+                    💬 I need to talk
+                </span>
+
+            </label>
+
+
+
+            <label class="emergency-option">
+
+                <input type="radio" name="emergency" value="I need reassurance ❤️">
+
+                <span>
+                    ❤️ I need reassurance
+                </span>
+
+            </label>
+
+
+
+            <label class="emergency-option">
+
+                <input type="radio" name="emergency" value="I just want you 🤍">
+
+                <span>
+                    🤍 I just want you
+                </span>
+
+            </label>
+
+
+        </div>
+
+
+
+        <button id="emergencyEnter">
+            ENTER
+        </button>
+
+
+    </div>
+
+</section>
+
+</main>
+
+<script src="data/girlfriend.js"></script>
+
+<script src="js/config.js"></script>
+
+<script src="js/audio.js"></script>
+
+<script src="js/intro.js"></script>
+
+<script src="js/authentication.js"></script>
+
+<script src="js/heartIntro.js"></script>
+
+<script src="js/missionRoom.js"></script>
+
+<script src="js/heartArchive.js"></script>
+
+<script src="js/ourWorld.js"></script>
+
+<script src="js/transition.js"></script>
+
+<script src="js/mission.js"></script>
+
+<script src="js/heart.js"></script>
+
+<script src="js/emotionalDatabase.js"></script>
+<script src="js/emergencyMode.js"></script>
+
+<!-- Core detection -->
+<script src="js/oreoEmotions.js"></script>
+<script src="js/oreoIntent.js"></script>
+<script src="js/oreoTopics.js"></script>
+
+
+<!-- Memory + understanding -->
+<script src="js/oreoMemory.js"></script>
+<script src="js/oreoContextAnalyzer.js"></script>
+
+
+<!-- Conversation intelligence -->
+<script src="js/oreoScenarios.js"></script>
+<script src="js/oreoConversationManager.js"></script>
+
+
+<!-- Response intelligence -->
+<script src="js/oreoResponsePlanner.js"></script>
+<script src="js/oreoResponses.js"></script>
+<script src="js/oreoResponseBuilder.js"></script>
+
+
+<!-- Personality -->
+<script src="js/oreoPersonalityEngine.js"></script>
+<script src="js/oreoEmotionalFilter.js"></script>
+
+
+<!-- Main brain -->
+<script src="js/oreo.js"></script>
+
+
+<!-- Chat interface LAST -->
+<script src="js/chat.js"></script>
+
+<script src="js/app.js"></script>
+
+</body>
+</html>

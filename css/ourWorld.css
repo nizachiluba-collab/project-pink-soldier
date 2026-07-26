@@ -1,0 +1,1206 @@
+/* ===============================
+   FILE 002 — OUR WORLD
+================================ */
+
+.our-world-experience{
+    position:fixed;
+    inset:0;
+    z-index:10000;
+
+    display:none;
+    overflow:hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(85,30,130,.25),
+            transparent 45%
+        ),
+        rgba(3,0,12,.97);
+
+    color:white;
+}
+
+.our-world-experience.open{
+    display:block;
+}
+
+
+/* ===============================
+   TOP BAR
+================================ */
+
+.our-world-topbar{
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+
+    z-index:200;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:25px 35px;
+
+    font-family:"Space Mono",monospace;
+    font-size:10px;
+    letter-spacing:2px;
+
+    border-bottom:1px solid rgba(255,255,255,.1);
+}
+
+/* Fixed pill-style back button — the "close our world"
+   action. Fixed + very high z-index so it stays reachable
+   even when a world-location overlay (z-index:300) is open. */
+.our-world-back-button{
+    position:fixed;
+
+    top:25px;
+    left:25px;
+
+    z-index:999999;
+
+    padding:12px 22px;
+
+    background:rgba(0,0,0,.45);
+    backdrop-filter:blur(12px);
+
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:30px;
+
+    color:white;
+
+    font-family:"Space Mono", monospace;
+    font-size:11px;
+    letter-spacing:2px;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.our-world-back-button:hover{
+    color:#ff73c6;
+    border-color:#ff73c6;
+}
+
+.our-world-status{
+    color:rgba(255,255,255,.4);
+}
+
+
+/* ===============================
+   INTRO
+================================ */
+
+.our-world-intro{
+    position:absolute;
+    inset:0;
+
+    z-index:10;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    padding:40px;
+    box-sizing:border-box;
+
+    text-align:center;
+
+    opacity:1;
+    visibility:visible;
+
+    transition:
+        opacity 1.2s ease,
+        transform 1.5s ease,
+        filter 1.2s ease;
+}
+
+.our-world-eyebrow{
+    margin-bottom:25px;
+
+    font-family:"Space Mono",monospace;
+    font-size:10px;
+    letter-spacing:4px;
+
+    color:#9fffe4;
+}
+
+.our-world-intro h2{
+    max-width:950px;
+    margin:0;
+
+    font-size:clamp(45px,7vw,100px);
+    line-height:.95;
+    letter-spacing:-4px;
+}
+
+.our-world-intro h2 span{
+    display:block;
+
+    color:#ff73c6;
+
+    text-shadow:
+        0 0 30px rgba(255,115,198,.35);
+}
+
+.our-world-opening{
+    max-width:600px;
+
+    margin:35px 0;
+
+    color:rgba(255,255,255,.65);
+
+    font-size:16px;
+    line-height:1.8;
+}
+
+
+/* ===============================
+   ENTER BUTTON
+================================ */
+
+.enter-world-button{
+    padding:16px 30px;
+
+    border:1px solid rgba(255,115,198,.6);
+
+    background:rgba(255,115,198,.08);
+
+    color:white;
+
+    font-family:"Space Mono",monospace;
+    font-size:11px;
+    letter-spacing:2px;
+
+    cursor:pointer;
+
+    transition:.4s ease;
+}
+
+.enter-world-button:hover{
+    transform:scale(1.05);
+
+    background:rgba(255,115,198,.18);
+
+    box-shadow:
+        0 0 30px rgba(255,115,198,.25);
+}
+
+
+/* ===============================
+   ACT II — OUR WORLD UNIVERSE
+================================ */
+
+.our-world-universe{
+    position:fixed;
+    inset:0;
+    z-index:50;
+
+    display:none;
+    overflow:hidden;
+
+    opacity:0;
+    visibility:hidden;
+
+    background:
+        radial-gradient(circle at 25% 40%,
+            rgba(255,70,180,.22),
+            transparent 30%
+        ),
+        radial-gradient(circle at 75% 60%,
+            rgba(80,80,255,.25),
+            transparent 35%
+        ),
+        #050010;
+
+    color:white;
+
+    transition:
+        opacity 1.2s ease,
+        visibility 1.2s ease;
+}
+
+/* Your JS adds this class right after setting
+   display:block — this is what fades it in. */
+.our-world-universe.arrived{
+    opacity:1;
+    visibility:visible;
+}
+
+
+/* ===============================
+   WORLD HEADING
+================================ */
+
+.world-heading{
+    position:absolute;
+    top:12%;
+    left:8%;
+
+    z-index:5;
+}
+
+.world-heading > p:first-child{
+    font-family:"Space Mono",monospace;
+    font-size:9px;
+    letter-spacing:4px;
+
+    color:#9fffe4;
+}
+
+.world-heading h2{
+    margin:15px 0;
+
+    font-size:clamp(55px,8vw,120px);
+    line-height:.8;
+    letter-spacing:-6px;
+}
+
+.world-heading h2 span{
+    color:#ff73c6;
+}
+
+.world-instruction{
+    color:rgba(255,255,255,.55);
+    line-height:1.7;
+}
+
+
+/* ===============================
+   WORLD MAP
+================================ */
+
+.world-map{
+    position:absolute;
+    inset:0;
+
+    z-index:10;
+}
+
+
+/* ===============================
+   DESTINATIONS
+================================ */
+
+.world-destination{
+    position:absolute;
+
+    width:260px;
+    height:260px;
+
+    padding:0;
+
+    background:none;
+    border:none;
+
+    color:white;
+
+    cursor:pointer;
+}
+
+.planet-us{
+    top:18%;
+    right:12%;
+}
+
+.the-future{
+    right:28%;
+    bottom:8%;
+}
+
+
+/* ===============================
+   PLANETS
+================================ */
+
+.destination-planet{
+    position:absolute;
+
+    top:50%;
+    left:50%;
+
+    width:100px;
+    height:100px;
+
+    transform:translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #ffb0df,
+            #ff4fae 35%,
+            #5e175d 70%,
+            #16001c
+        );
+
+    box-shadow:
+        0 0 30px rgba(255,80,190,.5),
+        0 0 80px rgba(255,80,190,.2);
+
+    transition:
+        transform .6s ease,
+        box-shadow .6s ease;
+}
+
+.the-future .destination-planet{
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #c4ffff,
+            #665cff 40%,
+            #26156e 70%,
+            #09001d
+        );
+
+    box-shadow:
+        0 0 30px rgba(100,100,255,.5),
+        0 0 80px rgba(100,100,255,.2);
+}
+
+
+/* ===============================
+   ORBITS
+================================ */
+
+.destination-orbit{
+    position:absolute;
+    inset:25px;
+
+    border:1px solid rgba(255,255,255,.15);
+
+    border-radius:50%;
+
+    animation:worldOrbit 12s linear infinite;
+}
+
+.destination-orbit::after{
+    content:"";
+
+    position:absolute;
+
+    top:15px;
+    left:35px;
+
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:white;
+
+    box-shadow:0 0 12px white;
+}
+
+@keyframes worldOrbit{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+
+/* ===============================
+   DESTINATION LABELS
+================================ */
+
+.destination-label{
+    position:absolute;
+
+    left:50%;
+    bottom:-5px;
+
+    transform:translateX(-50%);
+
+    width:250px;
+
+    text-align:center;
+}
+
+.destination-label small,
+.destination-label em{
+    display:block;
+
+    font-family:"Space Mono",monospace;
+    font-size:8px;
+    letter-spacing:2px;
+
+    color:rgba(255,255,255,.4);
+}
+
+.destination-label strong{
+    display:block;
+
+    margin:7px 0;
+
+    font-size:18px;
+    letter-spacing:2px;
+}
+
+.destination-label em{
+    font-style:normal;
+}
+
+
+/* ===============================
+   PLANET HOVER
+================================ */
+
+.world-destination:hover .destination-planet{
+    transform:
+        translate(-50%,-50%)
+        scale(1.18);
+
+    box-shadow:
+        0 0 50px rgba(255,100,210,.7),
+        0 0 130px rgba(255,80,190,.35);
+}
+
+
+/* ===============================
+   WORLD LOCATIONS
+================================ */
+
+.world-location{
+    position:fixed;
+    inset:0;
+
+    z-index:300;
+
+    display:none;
+
+    width:100vw;
+    height:100vh;
+
+    padding:8% 8% 5%;
+    box-sizing:border-box;
+
+    overflow-y:auto;
+
+    background:rgba(4,0,15,.98);
+
+    opacity:0;
+}
+
+.world-location.open{
+    display:block;
+
+    animation:
+        locationArrival
+        1.2s ease forwards;
+}
+
+@keyframes locationArrival{
+    from{
+        opacity:0;
+        transform:scale(1.08);
+        filter:blur(12px);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+        filter:blur(0);
+    }
+}
+
+
+/* ===============================
+   RETURN BUTTONS
+   (Our World, Planet Us sub-pages)
+   Both styled identically so every
+   "back" action looks consistent.
+================================ */
+
+.return-to-world,
+.return-to-planet{
+
+    position:fixed;
+
+    top:35px;
+    left:35px;
+
+    z-index:999999;
+
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    padding:14px 22px;
+
+    border:none;
+    border-radius:999px;
+
+    background:rgba(8,8,18,.55);
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
+    color:#fff;
+
+    font-family:"Space Mono", monospace;
+    font-size:11px;
+    letter-spacing:2px;
+
+    cursor:pointer;
+
+    transition:.35s ease;
+}
+
+.return-to-world:hover,
+.return-to-planet:hover{
+
+    background:rgba(255,115,198,.18);
+
+    color:#ff73c6;
+
+    transform:translateY(-2px);
+
+}
+
+
+/* ===============================
+   LOCATION CONTENT
+================================ */
+
+.location-content{
+    max-width:800px;
+
+    /* centers the block instead of
+       hugging the left edge */
+    margin:10vh auto 0;
+}
+
+.location-coordinate{
+    font-family:"Space Mono",monospace;
+
+    font-size:10px;
+    letter-spacing:4px;
+
+    color:#9fffe4;
+}
+
+.location-content h2{
+    margin:20px 0;
+
+    font-size:clamp(70px,10vw,150px);
+
+    line-height:.8;
+    letter-spacing:-7px;
+}
+
+.location-content h2 span{
+    color:#ff73c6;
+}
+
+.location-intro{
+    max-width:550px;
+
+    margin:0 auto;
+
+    color:rgba(255,255,255,.65);
+
+    font-size:17px;
+    line-height:1.8;
+}
+
+
+/* ===============================
+   DISTRICT GRID (Planet Us menu)
+================================ */
+
+.district-grid{
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    gap:20px;
+
+    max-width:1100px;
+
+    /* centers the grid instead of
+       hugging the left edge */
+    margin:50px auto 40px;
+}
+
+.district-card{
+    display:flex;
+    flex-direction:column;
+
+    align-items:flex-start;
+    text-align:left;
+
+    padding:26px;
+
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.06),
+            rgba(255,255,255,.015)
+        );
+
+    backdrop-filter:blur(10px);
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:
+        transform .4s cubic-bezier(.16,1,.3,1),
+        border-color .4s ease,
+        box-shadow .4s ease;
+}
+
+.district-card span{
+    font-size:28px;
+
+    margin-bottom:14px;
+}
+
+.district-card h3{
+    margin:0 0 8px;
+
+    font-size:16px;
+
+    letter-spacing:.5px;
+}
+
+.district-card p{
+    margin:0;
+
+    color:rgba(255,255,255,.55);
+
+    font-size:12px;
+
+    line-height:1.5;
+}
+
+.district-card:hover{
+    transform:translateY(-6px);
+
+    border-color:rgba(255,115,198,.6);
+
+    box-shadow:
+        0 20px 45px rgba(0,0,0,.3),
+        0 0 30px rgba(255,80,190,.15);
+}
+
+
+/* ===============================
+   MOBILE
+================================ */
+
+@media(max-width:700px){
+
+    .world-heading{
+        top:10%;
+        left:6%;
+    }
+
+    .world-heading h2{
+        letter-spacing:-3px;
+    }
+
+    .planet-us{
+        top:35%;
+        right:5%;
+    }
+
+    .the-future{
+        right:25%;
+        bottom:5%;
+    }
+
+    .world-destination{
+        width:190px;
+        height:190px;
+    }
+
+    .destination-planet{
+        width:75px;
+        height:75px;
+    }
+
+    .location-content h2{
+        letter-spacing:-4px;
+    }
+
+    .district-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+
+/* ======================================
+   MEMORY VIEWER
+   Fullscreen lightbox opened directly
+   from Picture Love / Video Love —
+   Planet Us stays open behind it, so
+   this is shown/hidden with opacity +
+   visibility rather than display, and
+   never blocks clicks while closed.
+====================================== */
+
+.memory-viewer{
+
+    position:fixed;
+    inset:0;
+
+    z-index:99999;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    backdrop-filter:blur(28px);
+    -webkit-backdrop-filter:blur(28px);
+
+    background:rgba(5,0,15,.55);
+
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+
+    transition:
+        opacity .4s ease,
+        visibility .4s ease;
+
+}
+
+.memory-viewer.open{
+
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+
+}
+
+.memory-viewer-header{
+
+    position:absolute;
+
+    top:30px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    text-align:center;
+
+    z-index:5;
+
+}
+
+.memory-viewer-header p{
+
+    font-size:12px;
+
+    letter-spacing:4px;
+
+    color:#9fffe4;
+
+    font-family:"Space Mono",monospace;
+
+}
+
+.memory-viewer-header span{
+
+    color:white;
+
+    opacity:.6;
+
+}
+
+.memory-stage{
+
+    position:relative;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    width:100%;
+    height:100%;
+
+    /* lower than the arrows/header/close button
+       below, so it never intercepts their clicks */
+    z-index:1;
+
+}
+
+@keyframes photoAppear{
+
+    from{
+        opacity:0;
+        transform:scale(.96);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+
+}
+
+.memory-stage img{
+
+    animation:photoAppear .45s ease;
+
+}
+
+.memory-arrow{
+
+    position:absolute;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    z-index:20;
+
+    width:70px;
+    height:70px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.08);
+
+    color:white;
+
+    font-size:28px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.memory-arrow:hover{
+
+    transform:
+        translateY(-50%)
+        scale(1.1);
+
+}
+
+.memory-arrow.left{
+
+    left:40px;
+
+}
+
+.memory-arrow.right{
+
+    right:40px;
+
+}
+
+.memory-viewer-close{
+
+    position:absolute;
+
+    left:50%;
+    bottom:35px;
+
+    transform:translateX(-50%);
+
+    z-index:999;
+
+    padding:14px 28px;
+
+    border:none;
+
+    border-radius:999px;
+
+    background:rgba(255,255,255,.08);
+
+    backdrop-filter:blur(18px);
+
+    color:white;
+
+    font-family:"Space Mono",monospace;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.memory-viewer-close:hover{
+
+    background:rgba(255,115,198,.18);
+
+    transform:
+        translateX(-50%)
+        scale(1.05);
+
+}
+
+.viewer-background{
+
+    position:absolute;
+    inset:0;
+
+    z-index:-1;
+
+    background-size:cover;
+    background-position:center;
+
+    filter:
+        blur(50px)
+        brightness(.35)
+        saturate(1.4);
+
+    transform:scale(1.2);
+
+    transition:
+        background-image .7s ease,
+        transform .7s ease,
+        filter .7s ease;
+
+}
+
+.gallery-image,
+.gallery-video{
+
+    display:block;
+
+    max-width:90vw;
+    max-height:88vh;
+
+    width:auto;
+    height:auto;
+
+    object-fit:contain;
+
+    margin:auto;
+
+    border-radius:24px;
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.55);
+
+}
+
+.viewer-error{
+
+    text-align:center;
+
+    color:rgba(255,255,255,.8);
+
+    font-family:"Space Mono",monospace;
+
+    padding:40px;
+
+}
+
+.viewer-error p{
+
+    font-size:16px;
+
+    letter-spacing:1px;
+
+    margin-bottom:12px;
+
+}
+
+.viewer-error small{
+
+    display:block;
+
+    color:rgba(255,255,255,.45);
+
+    word-break:break-all;
+
+    max-width:70vw;
+
+    margin:0 auto;
+
+}
+
+
+/* ===============================
+   MOBILE — MEMORY VIEWER
+================================ */
+
+@media(max-width:700px){
+
+    .memory-arrow{
+        width:50px;
+        height:50px;
+
+        font-size:22px;
+    }
+
+    .memory-arrow.left{
+        left:15px;
+    }
+
+    .memory-arrow.right{
+        right:15px;
+    }
+
+}
+
+
+/* ===============================
+   THE FUTURE — VISION BOARD
+   (centered header + image/video
+   grid with caption overlays)
+================================ */
+
+.future-header{
+
+    text-align:center;
+
+    max-width:800px;
+
+    margin:10vh auto 60px;
+
+}
+
+.future-coordinate{
+
+    font-family:"Space Mono",monospace;
+
+    letter-spacing:4px;
+
+    color:#ff9fd8;
+}
+
+.future-header h2{
+
+    font-size:clamp(50px,7vw,90px);
+
+    margin:15px 0;
+
+    line-height:.95;
+}
+
+.future-header h2 span{
+
+    color:#ff73c6;
+}
+
+.future-intro{
+
+    max-width:600px;
+
+    margin:0 auto;
+
+    opacity:.8;
+
+    line-height:1.8;
+}
+
+.future-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+
+    gap:30px;
+
+    max-width:1300px;
+
+    margin:0 auto 60px;
+}
+
+.future-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:20px;
+
+    background:#111;
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.45);
+}
+
+.future-card img,
+.future-card video{
+
+    width:100%;
+
+    height:420px;
+
+    object-fit:cover;
+
+    display:block;
+
+    transition:.6s;
+}
+
+.future-card:hover img,
+.future-card:hover video{
+
+    transform:scale(1.05);
+}
+
+.future-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:flex-end;
+
+    padding:28px;
+
+    background:
+        linear-gradient(
+            transparent,
+            rgba(0,0,0,.8)
+        );
+}
+
+.future-overlay h3{
+
+    font-size:1.4rem;
+
+    margin-bottom:8px;
+}
+
+.future-overlay p{
+
+    opacity:.85;
+
+    font-size:14px;
+}
+
+@media(max-width:700px){
+
+    .future-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+    .future-card img,
+.future-card video{
+
+    width:100%;
+    height:auto;
+
+    max-height:700px;
+
+    object-fit:contain;
+
+    background:#000;
+}

@@ -1,0 +1,477 @@
+.emotional-database{
+
+    position:fixed;
+
+    inset:0;
+
+    min-height:100%;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    flex-direction:column;
+
+
+    /* fills the whole screen edge-to-edge */
+    background:
+        linear-gradient(
+            rgba(0,0,0,.25),
+            rgba(0,0,0,.75)
+        ),
+        url("https://pub-bf59e4faf5904fc0875492866e65f840.r2.dev/assets/Images/silentVoice.jpg");
+
+    background-size:cover;
+
+    background-repeat:no-repeat;
+
+    background-position:center;
+
+    background-color:#000;
+
+
+    z-index:500;
+
+
+    color:white;
+
+
+    opacity:0;
+
+    pointer-events:none;
+
+
+    transform:translateY(40px);
+
+
+    transition:
+        opacity .5s ease,
+        transform .5s ease;
+
+}
+
+.emotional-database.open{
+
+    display:flex !important;
+
+    opacity:1;
+
+    pointer-events:auto;
+
+    transform:translateY(0);
+
+}
+
+/* All direct content sits above the background layer and
+   above anything else (canvas/ambient backgrounds) that
+   might be positioned on top of it elsewhere in the site */
+.emotional-database > *{
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+.database-terminal{
+
+    width:min(900px,90vw);
+
+    text-align:center;
+
+    color:white;
+
+}
+
+.database-small{
+
+    color:#88ffe7;
+
+    letter-spacing:6px;
+
+    text-transform:uppercase;
+
+    margin-bottom:30px;
+
+}
+
+.database-terminal h1{
+
+    font-size:5rem;
+
+    margin-bottom:20px;
+
+    color:white;
+
+}
+
+.database-subtitle{
+
+    font-size:20px;
+
+    color:#cfcfcf;
+
+    margin-bottom:60px;
+
+    line-height:1.8;
+
+}
+
+.database-search{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+    border:1px solid rgba(255,255,255,.15);
+
+    padding:22px 28px;
+
+    margin-bottom:35px;
+
+    background:rgba(0,0,0,.45);
+
+}
+
+.database-search span{
+
+    color:#7fffd4;
+
+    font-size:24px;
+
+}
+
+.database-search input{
+
+    flex:1;
+
+    background:none;
+
+    border:none;
+
+    outline:none;
+
+    color:white;
+
+    font-size:22px;
+
+}
+
+.database-search input::placeholder{
+
+    color:#8f8f8f;
+
+}
+
+#emotionSearch{
+
+    padding:18px 60px;
+
+    border-radius:999px;
+
+    border:1px solid rgba(255,255,255,.18);
+
+    background:rgba(18,18,18,.65);
+
+    color:white;
+
+    letter-spacing:3px;
+
+    cursor:pointer;
+
+}
+
+.mission-back-button{
+
+    position:absolute;
+
+    top:32px;
+    left:32px;
+
+    z-index:3;
+
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+
+    padding:14px 32px;
+
+    border:1px solid rgba(255,255,255,.35);
+    border-radius:999px;
+
+    background:rgba(0,0,0,.4);
+    backdrop-filter:blur(6px);
+
+    color:#fff;
+
+    font-family:"Space Mono",monospace;
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+
+    cursor:pointer;
+
+    transition:.35s ease;
+
+}
+
+.mission-back-button:hover{
+
+    background:rgba(255,255,255,.9);
+    color:#000;
+
+    border-color:transparent;
+
+    transform:translateY(-2px);
+
+    box-shadow:0 8px 24px rgba(0,0,0,.35);
+
+}
+
+.mission-back-button:active{
+
+    transform:translateY(0) scale(.97);
+
+}
+/* =====================================
+PROJECT OREO // AI CHAT INPUT
+===================================== */
+
+
+.chat-input-container {
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    width: 90%;
+    max-width: 900px;
+
+    margin: 25px auto 0;
+
+}
+
+
+
+/* Search / Message Bar */
+
+#userMessage {
+
+    flex: 1;
+
+    height: 60px;
+
+    padding: 0 25px;
+
+    border-radius: 50px;
+
+    border: 1px solid rgba(255, 105, 180, 0.5);
+
+    background: rgba(255,255,255,0.08);
+
+    backdrop-filter: blur(10px);
+
+    color: white;
+
+    font-size: 18px;
+
+    outline: none;
+
+    transition: 0.3s ease;
+
+}
+
+
+
+#userMessage::placeholder {
+
+    color: rgba(255,255,255,0.55);
+
+}
+
+
+
+/* Glow when typing */
+
+#userMessage:focus {
+
+    border-color: #ff69b4;
+
+    box-shadow:
+    0 0 15px rgba(255,105,180,0.5);
+
+}
+
+
+
+
+
+/* Send Button */
+
+#sendButton {
+
+    height: 60px;
+
+    padding: 0 35px;
+
+
+    border-radius: 50px;
+
+
+    border: none;
+
+
+    background:
+    linear-gradient(
+        135deg,
+        #ff69b4,
+        #ff1493
+    );
+
+
+    color:white;
+
+
+    font-size:18px;
+
+    font-weight:700;
+
+
+    cursor:pointer;
+
+
+    transition:0.3s ease;
+
+
+    box-shadow:
+    0 0 20px rgba(255,105,180,0.4);
+
+}
+
+
+
+#sendButton:hover {
+
+
+    transform:translateY(-3px);
+
+
+    box-shadow:
+    0 0 30px rgba(255,105,180,0.8);
+
+
+}
+
+
+
+#sendButton:active {
+
+    transform:scale(0.95);
+
+}
+/* =====================================
+CHAT BUBBLES
+===================================== */
+
+
+.chat-window {
+
+    width:90%;
+
+    max-width:900px;
+
+    height:400px;
+
+    overflow-y:auto;
+
+    margin:30px auto;
+
+    padding:20px;
+
+}
+
+
+
+
+.ai-message,
+.user-message {
+
+
+    max-width:70%;
+
+    padding:18px 22px;
+
+    border-radius:25px;
+
+    margin:15px 0;
+
+    line-height:1.5;
+
+    animation:messageAppear 0.3s ease;
+
+
+}
+
+
+
+.ai-message {
+
+
+    background:
+    rgba(255,105,180,0.15);
+
+
+    border:
+    1px solid rgba(255,105,180,0.4);
+
+
+    color:white;
+
+
+}
+
+
+
+.user-message {
+
+
+    background:
+    rgba(255,255,255,0.12);
+
+
+    margin-left:auto;
+
+
+    color:white;
+
+
+}
+
+
+
+@keyframes messageAppear {
+
+
+from {
+
+opacity:0;
+
+transform:translateY(10px);
+
+}
+
+
+to {
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+
+}

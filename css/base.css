@@ -1,0 +1,52 @@
+/* ===========================
+   BASE
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,
+body{
+
+    width:100%;
+    height:100%;
+
+    overflow:hidden;
+
+    background:#040404;
+    color:#F5F5F5;
+
+    font-family:Inter,sans-serif;
+
+}
+
+.hidden{
+
+    display:none;
+
+}
+
+main{
+
+    width:100vw;
+    height:100vh;
+
+    position:relative;
+
+}
+
+#signalCanvas{
+
+    position:fixed;
+
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    z-index:0;
+
+}

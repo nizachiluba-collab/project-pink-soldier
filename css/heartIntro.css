@@ -1,0 +1,340 @@
+/* ===========================
+   HEART INTRO
+=========================== */
+
+.heart-intro{
+    position:fixed;
+    inset:0;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    background:#000;
+    overflow:hidden;
+    z-index:9999;
+}
+
+#heartWords{
+    position:absolute;
+    inset:0;
+}
+
+/* ===========================
+   WORDS — drifting state
+=========================== */
+
+.floating-word{
+    position:absolute;
+    transform:translate(-50%,-50%) scale(.2);
+    opacity:0;
+    color:#ff69b4;
+    font-family:"Space Mono", monospace;
+    font-size:13px;
+    font-weight:bold;
+    white-space:nowrap;
+    pointer-events:none;
+    text-shadow:
+        0 0 10px hotpink,
+        0 0 25px deeppink;
+    animation:materialize .8s forwards;
+    will-change:transform,left,top;
+}
+
+@keyframes materialize{
+    0%{
+        opacity:0;
+        transform:translate(-50%,-50%) scale(.2);
+        filter:blur(10px);
+    }
+    50%{
+        opacity:1;
+        transform:translate(-50%,-50%) scale(1.15);
+        filter:blur(2px);
+    }
+    100%{
+        opacity:1;
+        transform:translate(-50%,-50%) scale(1);
+        filter:blur(0);
+    }
+}
+
+/* ===========================
+   WORDS — heart formation state
+=========================== */
+
+.heart-word{
+    font-size:11px;
+    text-shadow:
+        0 0 10px hotpink,
+        0 0 25px deeppink,
+        0 0 40px hotpink;
+}
+/* ===========================
+   GALAXY / STARFIELD
+=========================== */
+
+#galaxyLayer{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+}
+
+.star{
+    position:absolute;
+    border-radius:50%;
+    background:#fff;
+    opacity:0;
+    box-shadow:
+        0 0 4px 1px rgba(255,255,255,0.8),
+        0 0 8px 2px rgba(180,200,255,0.5);
+    animation:twinkle 3s ease-in-out infinite;
+    will-change:opacity,transform;
+}
+
+@keyframes twinkle{
+    0%{ opacity:0; transform:scale(0.8); }
+    50%{ opacity:1; transform:scale(1.2); }
+    100%{ opacity:0.3; transform:scale(0.9); }
+}
+.heart-word{
+    font-size:11px;
+    text-shadow:
+        0 0 10px hotpink,
+        0 0 25px deeppink,
+        0 0 40px hotpink;
+}
+
+.star-word{
+    font-size:2px;
+    color:transparent;
+    text-shadow:
+        0 0 6px #fff,
+        0 0 14px rgba(180,200,255,0.9),
+        0 0 24px rgba(180,200,255,0.5);
+    animation:twinkle 3s ease-in-out infinite;
+}/* ===========================
+   GALAXY BACKGROUND
+=========================== */
+
+#galaxyLayer{
+
+    position:fixed;
+    inset:0;
+
+    width:100vw;
+    height:100vh;
+
+    overflow:hidden;
+
+    pointer-events:none;
+
+    z-index:1;
+
+    opacity:1;
+
+    transition:
+        opacity 2s ease,
+        transform 8s linear,
+        filter 5s ease;
+
+    transform-origin:center;
+}
+
+/* Galaxy slowly comes alive */
+
+#galaxyLayer.awaken{
+
+    animation:
+        galaxyRotate 80s linear infinite,
+        galaxyDrift 25s ease-in-out infinite alternate;
+
+}
+
+/* ===========================
+   STARS
+=========================== */
+
+.star{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    background:white;
+
+    opacity:0;
+
+    box-shadow:
+        0 0 6px white,
+        0 0 12px rgba(180,210,255,.8),
+        0 0 30px rgba(150,180,255,.45);
+
+    animation:
+        twinkle 3s ease-in-out infinite;
+
+    will-change:
+        transform,
+        opacity;
+
+}
+
+/* ===========================
+   MISSION GALAXY
+=========================== */
+
+.galaxy-mission{
+
+    animation:
+        galaxyRotate 120s linear infinite,
+        galaxyDrift 40s ease-in-out infinite alternate,
+        galaxyShift 18s ease-in-out infinite;
+
+}
+
+/* ===========================
+   GALAXY ROTATION
+=========================== */
+
+@keyframes galaxyRotate{
+
+    from{
+
+        transform:
+            scale(1)
+            rotate(0deg);
+
+    }
+
+    to{
+
+        transform:
+            scale(1.15)
+            rotate(360deg);
+
+    }
+
+}
+
+/* ===========================
+   GALAXY FLOAT
+=========================== */
+
+@keyframes galaxyDrift{
+
+    0%{
+
+        transform:
+            translate(0px,0px)
+            scale(1.08);
+
+    }
+
+    50%{
+
+        transform:
+            translate(-20px,-12px)
+            scale(1.12);
+
+    }
+
+    100%{
+
+        transform:
+            translate(20px,15px)
+            scale(1.08);
+
+    }
+
+}
+
+/* ===========================
+   SPACE COLOUR SHIFT
+=========================== */
+
+@keyframes galaxyShift{
+
+    0%{
+
+        filter:
+            hue-rotate(0deg)
+            saturate(1);
+
+    }
+
+    25%{
+
+        filter:
+            hue-rotate(18deg)
+            saturate(1.15);
+
+    }
+
+    50%{
+
+        filter:
+            hue-rotate(35deg)
+            saturate(1.35);
+
+    }
+
+    75%{
+
+        filter:
+            hue-rotate(15deg)
+            saturate(1.2);
+
+    }
+
+    100%{
+
+        filter:
+            hue-rotate(0deg)
+            saturate(1);
+
+    }
+
+}
+
+/* ===========================
+   MISSION ROOM
+=========================== */
+
+.mission-room{
+
+    background:transparent;
+
+    backdrop-filter:blur(2px);
+
+    z-index:20;
+
+}
+
+/* Smooth appearance */
+
+.mission-room.show{
+
+    animation:
+        missionFade 2s ease forwards;
+
+}
+
+@keyframes missionFade{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            translateY(35px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}

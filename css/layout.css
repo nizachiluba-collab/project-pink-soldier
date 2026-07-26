@@ -1,0 +1,87 @@
+/* ===========================
+   LAYOUT
+=========================== */
+
+.verify-screen{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:40px;
+
+}
+
+.intro-sequence{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.start-screen{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.terminal-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.terminal-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+.terminal-input{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+.mission-room{
+
+    min-height:100vh;
+
+    padding:60px;
+
+}
