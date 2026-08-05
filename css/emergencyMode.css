@@ -3,28 +3,24 @@ PROJECT OREO — EMERGENCY MODE
 =============================== */
 
 
-.emergency-mode {
+.emergency-mode{
 
-    position: fixed;
-    inset: 0;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
 
     background-image:
     linear-gradient(
-        rgba(0,0,0,0.35),
-        rgba(0,0,0,0.65)
+        rgba(0,0,0,.25),
+        rgba(0,0,0,.55)
     ),
     url("https://pub-bf59e4faf5904fc0875492866e65f840.r2.dev/assets/Images/ellie%20last%20of%20us.jpg");
 
-    background-size: cover;
-    background-position: center;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    z-index:99999;
-
-    overflow:hidden;
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
 
 }
 
@@ -119,43 +115,32 @@ PROJECT OREO — EMERGENCY MODE
 /* PANEL */
 
 
-.emergency-panel {
-
+.emergency-panel{
 
     width:90%;
-
-    max-width:450px;
-
+    max-width:700px;
 
     padding:35px;
 
-
-    border-radius:30px;
-
-
     text-align:center;
 
+    background:transparent;
 
-    background:
-    rgba(0,0,0,.65);
+    backdrop-filter:none;
 
+    border:none;
 
-    backdrop-filter:
-    blur(15px);
-
+    box-shadow:none;
 
     color:white;
 
+.emergency-panel h1{
 
-    box-shadow:
-    0 0 40px rgba(255,105,180,.5);
+    font-size:3rem;
 
+    margin-bottom:10px;
 
-}
-
-.emergency-panel h1 {
-
-    color:#ff69b4;
+    text-shadow:0 0 20px rgba(255,105,180,.7);
 
 }
 
@@ -178,31 +163,23 @@ PROJECT OREO — EMERGENCY MODE
 
 
 
-.emergency-option {
+.emergency-option{
 
+    padding:18px 22px;
 
-    padding:16px;
+    border-radius:18px;
 
+    background:rgba(255,255,255,.08);
 
-    border-radius:20px;
+    backdrop-filter:blur(10px);
 
+    border:1px solid rgba(255,255,255,.15);
+
+    transition:.25s;
 
     cursor:pointer;
 
-
-    background:
-    rgba(255,255,255,.12);
-
-
-    border:
-    1px solid rgba(255,255,255,.25);
-
-
-    transition:.3s;
-
-
 }
-
 
 
 .emergency-option span {
