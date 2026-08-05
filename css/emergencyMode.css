@@ -2,154 +2,215 @@
 PROJECT OREO — EMERGENCY MODE
 =============================== */
 
-
 .emergency-mode{
 
     position:fixed;
-    top:0;
-    left:0;
-    width:100vw;
-    height:100vh;
 
-    background-image:
-    linear-gradient(
-        rgba(0,0,0,.25),
-        rgba(0,0,0,.55)
-    ),
-    url("https://pub-bf59e4faf5904fc0875492866e65f840.r2.dev/assets/Images/ellie%20last%20of%20us.jpg");
+    inset:0;
+
+    min-height:100%;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    flex-direction:column;
+
+    /* fills the whole screen edge-to-edge */
+    background:
+        linear-gradient(
+            rgba(0,0,0,.35),
+            rgba(0,0,0,.65)
+        ),
+        url("https://pub-bf59e4faf5904fc0875492866e65f840.r2.dev/assets/Images/ellie%20last%20of%20us.jpg");
 
     background-size:cover;
-    background-position:center;
+
     background-repeat:no-repeat;
+
+    background-position:center;
+
+    background-color:#000;
+
+    z-index:99999;
+
+    color:white;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transform:translateY(40px);
+
+    transition:
+        opacity .5s ease,
+        transform .5s ease;
+
+    overflow:hidden;
+
+}
+
+.emergency-mode.open{
+
+    display:flex !important;
+
+    opacity:1;
+
+    pointer-events:auto;
+
+    transform:translateY(0);
+
+}
+
+/* All direct content sits above the background layer and
+   above the star overlay */
+.emergency-mode > *{
+
+    position:relative;
+
+    z-index:2;
 
 }
 
 
 /* STAR OVERLAY */
 
-.stars {
+.emergency-stars{
 
     position:absolute;
+
     inset:0;
 
+    pointer-events:none;
+
     background-image:
-    radial-gradient(white 1px, transparent 1px);
+        radial-gradient(circle, white 1px, transparent 2px),
+        radial-gradient(circle, white 2px, transparent 3px),
+        radial-gradient(circle, #ffb6e6 1px, transparent 2px);
 
     background-size:
-    40px 40px;
+        90px 90px,
+        150px 150px,
+        220px 220px;
 
-    opacity:.35;
+    background-position:
+        0 0,
+        40px 60px,
+        100px 120px;
 
     animation:
-    starsMove 20s linear infinite;
+        starFlash 3s infinite alternate;
+
+    opacity:.7;
+
+    z-index:1;
 
 }
 
+@keyframes starFlash{
 
-@keyframes starsMove {
+    0%{
 
-    from {
-        transform:translateY(0);
+        opacity:.25;
+
+        transform:scale(1);
+
     }
 
-    to {
-        transform:translateY(-100px);
+    50%{
+
+        opacity:.8;
+
+    }
+
+    100%{
+
+        opacity:.35;
+
+        transform:scale(1.03);
+
     }
 
 }
-
 
 
 /* BACK BUTTON */
 
-
-.emergency-back {
+.emergency-back{
 
     position:absolute;
 
     top:25px;
     left:25px;
 
+    z-index:3;
 
-    padding:
-    12px 25px;
-
+    padding:12px 25px;
 
     border-radius:50px;
 
+    border:1px solid rgba(255,255,255,.3);
 
-    border:none;
-
-
-    background:
-    rgba(255,255,255,.15);
-
+    background:rgba(255,255,255,.15);
 
     color:white;
 
-
     backdrop-filter:blur(10px);
-
 
     cursor:pointer;
 
-
     font-weight:bold;
-
-
-    border:
-    1px solid rgba(255,255,255,.3);
 
 }
 
-
-
-.emergency-back:hover {
+.emergency-back:hover{
 
     background:#ff69b4;
 
 }
 
+.emergency-hidden{
 
-
-/* PANEL */
-
-
-.emergency-panel{
-
-    width:90%;
-    max-width:700px;
-
-    padding:35px;
-
-    text-align:center;
-
-    background:transparent;
-
-    backdrop-filter:none;
-
-    border:none;
-
-    box-shadow:none;
-
-    color:white;
-
-.emergency-panel h1{
-
-    font-size:3rem;
-
-    margin-bottom:10px;
-
-    text-shadow:0 0 20px rgba(255,105,180,.7);
+    display:none;
 
 }
 
 
+/* PANEL */
+
+.emergency-panel{
+
+    width:90%;
+
+    max-width:450px;
+
+    padding:35px;
+
+    border-radius:30px;
+
+    text-align:center;
+
+    background:rgba(0,0,0,.65);
+
+    backdrop-filter:blur(15px);
+
+    color:white;
+
+    box-shadow:0 0 40px rgba(255,105,180,.5);
+
+}
+
+.emergency-panel h1{
+
+    color:#ff69b4;
+
+}
+
 
 /* OPTIONS */
 
-
-.emergency-options {
+.emergency-options{
 
     display:flex;
 
@@ -161,28 +222,23 @@ PROJECT OREO — EMERGENCY MODE
 
 }
 
-
-
 .emergency-option{
 
-    padding:18px 22px;
+    padding:16px;
 
-    border-radius:18px;
-
-    background:rgba(255,255,255,.08);
-
-    backdrop-filter:blur(10px);
-
-    border:1px solid rgba(255,255,255,.15);
-
-    transition:.25s;
+    border-radius:20px;
 
     cursor:pointer;
 
+    background:rgba(255,255,255,.12);
+
+    border:1px solid rgba(255,255,255,.25);
+
+    transition:.3s;
+
 }
 
-
-.emergency-option span {
+.emergency-option span{
 
     color:white;
 
@@ -190,166 +246,57 @@ PROJECT OREO — EMERGENCY MODE
 
 }
 
-
-
-.emergency-option input {
+.emergency-option input{
 
     display:none;
 
 }
 
-
-
-.emergency-option:hover {
+.emergency-option:hover{
 
     transform:translateY(-3px);
 
-    background:
-    rgba(255,105,180,.35);
+    background:rgba(255,105,180,.35);
 
 }
 
-
-
-.emergency-option:has(input:checked) {
-
+.emergency-option:has(input:checked){
 
     background:#ff69b4;
 
-
-    box-shadow:
-    0 0 20px #ff69b4;
-
+    box-shadow:0 0 20px #ff69b4;
 
 }
-
 
 
 /* ENTER BUTTON */
 
+#emergencyEnter{
 
-#emergencyEnter {
-
-
-    padding:
-    15px 60px;
-
+    padding:15px 60px;
 
     border-radius:50px;
 
-
     border:none;
-
 
     cursor:pointer;
 
-
     background:#ff69b4;
-
 
     color:white;
 
-
     font-size:18px;
-
 
     font-weight:bold;
 
-
-    box-shadow:
-    0 0 20px rgba(255,105,180,.8);
-
+    box-shadow:0 0 20px rgba(255,105,180,.8);
 
     transition:.3s;
 
-
 }
 
-
-
-#emergencyEnter:hover {
+#emergencyEnter:hover{
 
     transform:scale(1.08);
-
-}
-
-
-
-
-.emergency-back {
-    z-index: 100000;
-    position: absolute;
-}
-.emergency-hidden {
-    display: none;
-}
-/* ===============================
-EMERGENCY MODE STAR FIELD
-=============================== */
-
-
-.emergency-stars {
-
-    position:absolute;
-
-    inset:0;
-
-    pointer-events:none;
-
-
-    background-image:
-        radial-gradient(circle, white 1px, transparent 2px),
-        radial-gradient(circle, white 2px, transparent 3px),
-        radial-gradient(circle, #ffb6e6 1px, transparent 2px);
-
-
-    background-size:
-        90px 90px,
-        150px 150px,
-        220px 220px;
-
-
-    background-position:
-        0 0,
-        40px 60px,
-        100px 120px;
-
-
-    animation:
-        starFlash 3s infinite alternate;
-
-
-    opacity:.7;
-
-}
-
-
-
-@keyframes starFlash {
-
-
-    0% {
-
-        opacity:.25;
-
-        transform:scale(1);
-
-    }
-
-
-    50% {
-
-        opacity:.8;
-
-    }
-
-
-    100% {
-
-        opacity:.35;
-
-        transform:scale(1.03);
-
-    }
 
 }
