@@ -1,575 +1,218 @@
 // ==========================================
 // PROJECT OREO
-// MAIN AI CONTROLLER
-// VERSION 6.0
-// FULL CONVERSATIONAL ENGINE
-// MEMORY COMPATIBLE
+// OREO AI — SECURE BACKEND
+// CLOUDFLARE PAGES FUNCTION
 // ==========================================
 
+export async function onRequestPost(context) {
 
-const oreoAI = {
+    try {
 
+        // ======================================
+        // READ REQUEST
+        // ======================================
 
+        const body =
+            await context.request.json();
 
-respond(message){
 
+        const {
+            system,
+            input
+        } = body;
 
 
-console.log(
-"Oreo received:",
-message
-);
+        // ======================================
+        // VALIDATE INPUT
+        // ======================================
 
+        if (
+            typeof input !== "string" ||
+            !input.trim()
+        ) {
 
+            return Response.json(
+                {
+                    error: "Missing input."
+                },
+                {
+                    status: 400
+                }
+            );
 
+        }
 
 
-// ==========================================
-// EMOTION DETECTION
-// ==========================================
+        // ======================================
+        // GET SECRET
+        // ======================================
 
+        const apiKey =
+            context.env.OPENAI_API_KEY;
 
-const emotionResult =
 
-oreoEmotions.detect(message);
+        if (!apiKey) {
 
+            console.error(
+                "OPENAI_API_KEY is not configured."
+            );
 
 
-const emotion =
+            return Response.json(
+                {
+                    error:
+                        "Oreo AI backend is not configured."
+                },
+                {
+                    status: 500
+                }
+            );
 
-emotionResult.primary;
+        }
 
 
+        // ======================================
+        // CALL OPENAI RESPONSES API
+        // ======================================
 
-const secondaryEmotion =
+        const openAIResponse =
+            await fetch(
+                "https://api.openai.com/v1/responses",
+                {
 
-emotionResult.secondary || null;
+                    method: "POST",
 
+                    headers: {
 
+                        "Content-Type":
+                            "application/json",
 
+                        "Authorization":
+                            `Bearer ${apiKey}`
 
+                    },
 
-console.log(
-"Emotion:",
-emotion
-);
+                    body: JSON.stringify({
 
+                        model: "gpt-5.6-luna",
 
+                        instructions:
+                            typeof system === "string"
+                                ? system
+                                : "",
 
+                        input: input,
 
+                        store: false
 
+                    })
 
+                }
+            );
 
-// ==========================================
-// INTENT DETECTION
-// ==========================================
 
+        // ======================================
+        // READ RESPONSE
+        // ======================================
 
-const intent =
+        const data =
+            await openAIResponse.json();
 
-oreoIntent.detect(message);
 
+        // ======================================
+        // HANDLE OPENAI ERROR
+        // ======================================
 
+        if (!openAIResponse.ok) {
 
-console.log(
-"Intent:",
-intent
-);
+            console.error(
+                "OpenAI API error:",
+                data
+            );
 
 
+            return Response.json(
+                {
+                    error:
+                        data?.error?.message ||
+                        "OpenAI request failed."
+                },
+                {
+                    status:
+                        openAIResponse.status
+                }
+            );
 
+        }
 
 
+        // ======================================
+        // EXTRACT TEXT
+        // ======================================
 
+        const text =
+            data.output_text || "";
 
-// ==========================================
-// TOPIC DETECTION
-// ==========================================
 
+        if (!text) {
 
-const topic =
+            console.error(
+                "OpenAI returned no output text.",
+                data
+            );
 
-oreoTopics.detect(message);
 
+            return Response.json(
+                {
+                    error:
+                        "Oreo received an empty response."
+                },
+                {
+                    status: 502
+                }
+            );
 
+        }
 
-console.log(
-"Topic:",
-topic
-);
 
+        // ======================================
+        // RETURN TO FRONTEND
+        // ======================================
 
+        return Response.json({
 
+            success: true,
 
+            text: text,
 
+            responseId:
+                data.id || null,
 
+            model:
+                data.model ||
+                "gpt-5.6-luna"
 
-// ==========================================
-// SCENARIO DETECTION
-// ==========================================
+        });
 
 
-let scenario = null;
+    } catch (error) {
 
+        console.error(
+            "OREO BACKEND ERROR:",
+            error
+        );
 
 
-if(typeof oreoScenario !== "undefined"){
+        return Response.json(
+            {
+                error:
+                    "Oreo's backend encountered an error."
+            },
+            {
+                status: 500
+            }
+        );
 
-
-scenario =
-
-oreoScenario.detect(message);
-
+    }
 
 }
-
-
-
-
-
-
-
-// Continue existing scenario
-
-
-if(
-
-(!scenario || scenario==="general")
-
-&&
-
-oreoMemory
-
-&&
-
-oreoMemory.context
-
-&&
-
-oreoMemory.context.scenario
-
-)
-
-{
-
-
-scenario =
-
-oreoMemory.context.scenario;
-
-
-}
-
-
-
-
-
-
-console.log(
-"Scenario:",
-scenario
-);
-
-
-
-
-
-
-
-// ==========================================
-// CONTEXT ANALYSIS
-// ==========================================
-
-
-const context =
-
-oreoContextAnalyzer.analyze(
-
-message,
-
-oreoMemory
-
-);
-
-
-
-console.log(
-"Context:",
-context
-);
-
-
-
-
-
-
-
-// ==========================================
-// SAVE USER MESSAGE
-// ==========================================
-
-
-oreoMemory.rememberUserMessage({
-
-
-message:message,
-
-
-emotion:emotion,
-
-
-secondaryEmotion:secondaryEmotion,
-
-
-intent:intent,
-
-
-topic:topic,
-
-
-scenario:scenario,
-
-
-context:context
-
-
-});
-
-
-
-
-
-
-
-// Update memory
-
-
-oreoMemory.updateContext({
-
-
-...context,
-
-
-scenario:scenario
-
-
-});
-
-
-
-
-
-
-
-
-// ==========================================
-// CONVERSATION MANAGEMENT
-// ==========================================
-
-
-const conversation =
-
-oreoConversationManager.analyze({
-
-
-message:message,
-
-
-emotion:emotion,
-
-
-secondaryEmotion:secondaryEmotion,
-
-
-intent:intent,
-
-
-topic:topic,
-
-
-scenario:scenario,
-
-
-context:context,
-
-
-memory:oreoMemory
-
-
-});
-
-
-
-
-
-console.log(
-"Conversation:",
-conversation
-);
-
-
-
-
-
-
-
-// ==========================================
-// RESPONSE PLANNER
-// ==========================================
-
-
-const responsePlan =
-
-oreoResponsePlanner.plan({
-
-
-emotion:emotion,
-
-
-secondaryEmotion:secondaryEmotion,
-
-
-intent:intent,
-
-
-topic:topic,
-
-
-scenario:scenario,
-
-
-context:context,
-
-
-conversation:conversation
-
-
-});
-
-
-
-
-
-console.log(
-"Response Plan:",
-responsePlan
-);
-
-
-
-
-
-
-
-// ==========================================
-// PERSONALITY ENGINE
-// ==========================================
-
-
-const personality =
-
-oreoPersonalityEngine.analyze({
-
-
-emotion:emotion,
-
-
-secondaryEmotion:secondaryEmotion,
-
-
-topic:topic,
-
-
-scenario:scenario,
-
-
-conversation:conversation,
-
-
-plan:responsePlan
-
-
-});
-
-
-
-
-
-console.log(
-"Personality:",
-personality
-);
-
-
-
-
-
-
-
-// ==========================================
-// EMOTIONAL STYLE
-// ==========================================
-
-
-const emotionalStyle =
-
-oreoEmotionalFilter.analyze({
-
-
-emotion:emotion,
-
-
-secondaryEmotion:secondaryEmotion,
-
-
-intent:intent,
-
-
-topic:topic,
-
-
-scenario:scenario
-
-
-});
-
-
-
-
-
-console.log(
-"Response Style:",
-emotionalStyle
-);
-
-
-
-
-
-
-
-// ==========================================
-// BUILD RESPONSE
-// ==========================================
-
-
-const response =
-
-oreoResponseBuilder.build({
-
-
-message:message,
-
-
-emotion:emotion,
-
-
-secondaryEmotion:secondaryEmotion,
-
-
-intent:intent,
-
-
-topic:topic,
-
-
-scenario:scenario,
-
-
-style:emotionalStyle,
-
-
-context:context,
-
-
-conversation:conversation,
-
-
-plan:responsePlan,
-
-
-personality:personality,
-
-
-memory:oreoMemory
-
-
-});
-
-
-
-
-
-
-
-// ==========================================
-// SAVE RESPONSE
-// ==========================================
-
-
-oreoMemory.rememberResponse(
-
-response
-
-);
-
-
-
-
-
-
-
-// Save question if Oreo asked one
-
-
-const questionMatch =
-
-response.match(/[^?]*\?/);
-
-
-
-if(questionMatch){
-
-
-oreoMemory.rememberQuestion(
-
-questionMatch[0]
-
-);
-
-
-}
-
-
-
-
-
-
-
-console.log(
-"Oreo Response:",
-response
-);
-
-
-
-
-
-
-return response;
-
-
-
-}
-
-
-
-
-
-};
-
-
-
-
-
-window.oreoAI = oreoAI;
