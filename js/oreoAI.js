@@ -1,14 +1,39 @@
 // ==========================================
 // PROJECT OREO
 // MAIN AI CONTROLLER
-// VERSION 7.0
-// REAL AI + MEMORY + PERSONALITY
+// VERSION 8.0
+// MODEL-FREE CONVERSATIONAL CORE
+// REAL AI BACKEND OPTIONAL
 // ==========================================
 
 
+const OREO_CONFIG = {
+
+    // ==========================================
+    // OREO OPERATING MODE
+    // ==========================================
+
+    USE_LOCAL_AI: true,
+
+    /*
+        true  = FREE OREO CORE
+        false = OpenAI API mode
+
+        LOCAL MODE DOES NOT CALL THE API.
+    */
+
+};
+
+
+// ==========================================
+// OREO AI
+// ==========================================
+
 const oreoAI = {
 
-    version: "7.0",
+
+    version: "8.0",
+
 
     state: {
 
@@ -30,7 +55,9 @@ const oreoAI = {
     init() {
 
         if (this.state.initialized) {
+
             return;
+
         }
 
 
@@ -38,12 +65,21 @@ const oreoAI = {
             this.createConversationId();
 
 
-        this.state.initialized = true;
+        this.state.initialized =
+            true;
 
 
         console.log(
             `%c🐾 OREO AI ${this.version} INITIALIZED`,
             "color:#7c5cff;font-weight:bold;"
+        );
+
+
+        console.log(
+            "Operating mode:",
+            OREO_CONFIG.USE_LOCAL_AI
+                ? "FREE LOCAL"
+                : "OPENAI API"
         );
 
 
@@ -74,7 +110,9 @@ const oreoAI = {
 
 
         if (!this.state.initialized) {
+
             this.init();
+
         }
 
 
@@ -87,10 +125,12 @@ const oreoAI = {
         }
 
 
-        this.state.processing = true;
+        this.state.processing =
+            true;
 
 
         try {
+
 
             const cleanMessage =
                 message.trim();
@@ -103,7 +143,7 @@ const oreoAI = {
 
 
             // ==================================
-            // UNDERSTANDING
+            // 1. UNDERSTANDING
             // ==================================
 
             const understanding =
@@ -119,7 +159,7 @@ const oreoAI = {
 
 
             // ==================================
-            // MEMORY RETRIEVAL
+            // 2. MEMORY RETRIEVAL
             // ==================================
 
             const memories =
@@ -136,7 +176,7 @@ const oreoAI = {
 
 
             // ==================================
-            // CONTEXT
+            // 3. CONTEXT
             // ==================================
 
             const context =
@@ -154,13 +194,51 @@ const oreoAI = {
                 });
 
 
+            console.log(
+                "🧩 Oreo Context:",
+                context
+            );
+
+
             // ==================================
-            // RESPONSE PLAN
+            // 4. REASONING
+            // ==================================
+
+            const reasoning =
+                await this.reason({
+
+                    message:
+                        cleanMessage,
+
+                    understanding:
+                        understanding,
+
+                    context:
+                        context,
+
+                    memories:
+                        memories
+
+                });
+
+
+            console.log(
+                "🧠 OREO REASONING:",
+                reasoning
+            );
+
+
+            // ==================================
+            // 5. RESPONSE PLAN
             // ==================================
 
             const plan =
                 await this.planResponse(
-                    context
+
+                    context,
+
+                    reasoning
+
                 );
 
 
@@ -171,7 +249,7 @@ const oreoAI = {
 
 
             // ==================================
-            // PERSONALITY
+            // 6. PERSONALITY
             // ==================================
 
             const personality =
@@ -184,7 +262,10 @@ const oreoAI = {
                         context,
 
                     plan:
-                        plan
+                        plan,
+
+                    reasoning:
+                        reasoning
 
                 });
 
@@ -196,7 +277,7 @@ const oreoAI = {
 
 
             // ==================================
-            // EMOTIONAL STYLE
+            // 7. EMOTIONAL STYLE
             // ==================================
 
             const emotionalStyle =
@@ -212,7 +293,7 @@ const oreoAI = {
 
 
             // ==================================
-            // REAL AI
+            // 8. GENERATE RESPONSE
             // ==================================
 
             const generated =
@@ -226,6 +307,9 @@ const oreoAI = {
 
                     plan:
                         plan,
+
+                    reasoning:
+                        reasoning,
 
                     memories:
                         memories,
@@ -243,13 +327,13 @@ const oreoAI = {
 
 
             console.log(
-                "🐾 REAL OREO RESPONSE:",
+                "🐾 OREO RESPONSE:",
                 generated
             );
 
 
             // ==================================
-            // EMOTIONAL STATE
+            // 9. EMOTIONAL STATE
             // ==================================
 
             const emotionalState =
@@ -261,14 +345,23 @@ const oreoAI = {
                     plan:
                         plan,
 
+                    reasoning:
+                        reasoning,
+
                     response:
                         generated
 
                 });
 
 
+            console.log(
+                "💗 OREO EMOTIONAL STATE:",
+                emotionalState
+            );
+
+
             // ==================================
-            // ACTIONS
+            // 10. ACTIONS
             // ==================================
 
             const actions =
@@ -281,13 +374,16 @@ const oreoAI = {
                         context,
 
                     plan:
-                        plan
+                        plan,
+
+                    reasoning:
+                        reasoning
 
                 });
 
 
             // ==================================
-            // SAVE EVERYTHING
+            // 11. SAVE CONVERSATION
             // ==================================
 
             await this.storeConversation({
@@ -308,7 +404,7 @@ const oreoAI = {
 
 
             // ==================================
-            // RETURN
+            // 12. RETURN
             // ==================================
 
             return this.createResponse(
@@ -322,6 +418,8 @@ const oreoAI = {
                     memories,
 
                     context,
+
+                    reasoning,
 
                     plan,
 
@@ -347,7 +445,10 @@ const oreoAI = {
             );
 
 
-        } catch (error) {
+        }
+
+        catch (error) {
+
 
             console.error(
                 "🐾 OREO AI ERROR:",
@@ -360,7 +461,9 @@ const oreoAI = {
                 "Give me one second, Daniella. My brain just tripped over itself 😭❤️",
 
                 {
-                    error: true,
+
+                    error:
+                        true,
 
                     errorMessage:
                         error.message
@@ -369,8 +472,10 @@ const oreoAI = {
 
             );
 
+        }
 
-        } finally {
+
+        finally {
 
             this.state.processing =
                 false;
@@ -386,40 +491,40 @@ const oreoAI = {
 
     async understand(message) {
 
+
         const result = {
 
             message:
-
                 message,
 
             emotion:
-
                 null,
 
             secondaryEmotion:
-
                 null,
 
             intent:
-
                 null,
 
             topic:
-
                 null,
 
             scenario:
-
                 null,
 
             context:
-
                 null
 
         };
 
 
-        if (window.oreoEmotions) {
+        // ==================================
+        // EMOTION
+        // ==================================
+
+        if (
+            window.oreoEmotions
+        ) {
 
             const emotionResult =
                 window.oreoEmotions.detect(
@@ -430,6 +535,7 @@ const oreoAI = {
             result.emotion =
                 emotionResult;
 
+
             result.secondaryEmotion =
                 emotionResult?.secondary ||
                 null;
@@ -437,7 +543,13 @@ const oreoAI = {
         }
 
 
-        if (window.oreoIntent) {
+        // ==================================
+        // INTENT
+        // ==================================
+
+        if (
+            window.oreoIntent
+        ) {
 
             result.intent =
                 window.oreoIntent.detect(
@@ -447,7 +559,13 @@ const oreoAI = {
         }
 
 
-        if (window.oreoTopics) {
+        // ==================================
+        // TOPIC
+        // ==================================
+
+        if (
+            window.oreoTopics
+        ) {
 
             result.topic =
                 window.oreoTopics.detect(
@@ -457,7 +575,13 @@ const oreoAI = {
         }
 
 
-        if (window.oreoScenario) {
+        // ==================================
+        // SCENARIO
+        // ==================================
+
+        if (
+            window.oreoScenario
+        ) {
 
             result.scenario =
                 window.oreoScenario.detect(
@@ -466,6 +590,10 @@ const oreoAI = {
 
         }
 
+
+        // ==================================
+        // CONTEXT
+        // ==================================
 
         if (
             window.oreoContextAnalyzer &&
@@ -487,7 +615,7 @@ const oreoAI = {
 
 
     // ======================================
-    // MEMORY
+    // MEMORY RETRIEVAL
     // ======================================
 
     async retrieveMemory(
@@ -495,15 +623,22 @@ const oreoAI = {
         understanding
     ) {
 
+
         const memories = [];
 
 
-        if (!window.oreoMemory) {
+        if (
+            !window.oreoMemory
+        ) {
+
             return memories;
+
         }
 
 
-        // Previous user message
+        // ==================================
+        // PREVIOUS USER MESSAGE
+        // ==================================
 
         const previous =
             window.oreoMemory
@@ -528,7 +663,9 @@ const oreoAI = {
         }
 
 
-        // Current context
+        // ==================================
+        // CURRENT CONVERSATION CONTEXT
+        // ==================================
 
         if (
             window.oreoMemory.context
@@ -560,6 +697,7 @@ const oreoAI = {
     // ======================================
 
     async buildContext(data) {
+
 
         const {
 
@@ -612,28 +750,135 @@ const oreoAI = {
 
 
     // ======================================
+    // REASONING
+    // ======================================
+
+    async reason(data) {
+
+
+        if (
+            window.oreoReasoning
+        ) {
+
+            return window
+                .oreoReasoning
+                .analyze({
+
+                    message:
+                        data.message,
+
+                    emotion:
+                        data.understanding
+                            .emotion,
+
+                    secondaryEmotion:
+                        data.understanding
+                            .secondaryEmotion,
+
+                    intent:
+                        data.understanding
+                            .intent,
+
+                    topic:
+                        data.understanding
+                            .topic,
+
+                    scenario:
+                        data.understanding
+                            .scenario,
+
+                    context:
+                        data.context,
+
+                    conversation:
+                        data.context
+                            ?.conversation,
+
+                    memory:
+                        data.memories
+
+                });
+
+        }
+
+
+        // ==================================
+        // FALLBACK REASONING
+        // ==================================
+
+        return {
+
+            userNeed:
+                "conversation",
+
+            responseGoal:
+                "continue_conversation",
+
+            shouldValidate:
+                true,
+
+            shouldAdvise:
+                false,
+
+            shouldAskQuestion:
+                false,
+
+            shouldReferenceMemory:
+                false,
+
+            shouldMentionNiza:
+                false,
+
+            emotionalDepth:
+                "normal",
+
+            urgency:
+                "normal",
+
+            conversationalMode:
+                "casual",
+
+            confidence:
+                0.3
+
+        };
+
+    },
+
+
+    // ======================================
     // PLANNING
     // ======================================
 
-    async planResponse(context) {
+    async planResponse(
+        context,
+        reasoning
+    ) {
+
 
         let conversation =
             null;
 
+
+        // ==================================
+        // CONVERSATION MANAGER
+        // ==================================
 
         if (
             window.oreoConversationManager
         ) {
 
             conversation =
-                window.oreoConversationManager
+                window
+                    .oreoConversationManager
                     .analyze({
 
                         message:
                             context.userMessage,
 
                         emotion:
-                            context.emotion?.primary,
+                            context.emotion
+                                ?.primary,
 
                         secondaryEmotion:
                             context.secondaryEmotion,
@@ -658,9 +903,14 @@ const oreoAI = {
         }
 
 
+        // ==================================
+        // DEFAULT PLAN
+        // ==================================
+
         let plan = {
 
             goal:
+                reasoning?.responseGoal ||
                 "conversation",
 
             tone:
@@ -670,13 +920,15 @@ const oreoAI = {
                 "normal",
 
             askQuestion:
+                reasoning?.shouldAskQuestion ||
                 false,
 
             giveAdvice:
+                reasoning?.shouldAdvise ||
                 false,
 
             validate:
-                true,
+                reasoning?.shouldValidate !== false,
 
             steps: [
 
@@ -689,16 +941,22 @@ const oreoAI = {
         };
 
 
+        // ==================================
+        // RESPONSE PLANNER
+        // ==================================
+
         if (
             window.oreoResponsePlanner
         ) {
 
             plan =
-                window.oreoResponsePlanner
+                window
+                    .oreoResponsePlanner
                     .plan({
 
                         emotion:
-                            context.emotion?.primary,
+                            context.emotion
+                                ?.primary,
 
                         secondaryEmotion:
                             context.secondaryEmotion,
@@ -716,24 +974,71 @@ const oreoAI = {
                             context.conversation,
 
                         conversation:
-                            conversation
+                            conversation,
+
+                        reasoning:
+                            reasoning
 
                     });
 
         }
 
 
-        // Normalize planner output
+        // ==================================
+        // NORMALIZE PLAN WITH REASONING
+        // ==================================
 
         plan.conversation =
             conversation;
 
 
-        // Do not force questions.
+        plan.reasoning =
+            reasoning;
+
+
+        /*
+         * The reasoning engine is the higher-level
+         * decision maker.
+         *
+         * This prevents the older planner from
+         * accidentally forcing behavior.
+         */
+
 
         if (
-            conversation &&
-            conversation.shouldAskQuestion === false
+            reasoning
+        ) {
+
+            plan.askQuestion =
+                reasoning.shouldAskQuestion;
+
+
+            plan.giveAdvice =
+                reasoning.shouldAdvise;
+
+
+            plan.validate =
+                reasoning.shouldValidate;
+
+
+            if (
+                reasoning.responseGoal
+            ) {
+
+                plan.responseGoal =
+                    reasoning.responseGoal;
+
+            }
+
+        }
+
+
+        // ==================================
+        // GREETINGS
+        // ==================================
+
+        if (
+            context.intent === "greeting"
         ) {
 
             plan.askQuestion =
@@ -752,6 +1057,7 @@ const oreoAI = {
     // ======================================
 
     async buildPersonality(data) {
+
 
         if (
             window.oreoPersonalityEngine
@@ -772,7 +1078,10 @@ const oreoAI = {
                         data.plan.conversation,
 
                     plan:
-                        data.plan
+                        data.plan,
+
+                    reasoning:
+                        data.reasoning
 
                 });
 
@@ -808,6 +1117,7 @@ const oreoAI = {
     async buildEmotionalStyle(
         understanding
     ) {
+
 
         if (
             window.oreoEmotionalFilter
@@ -856,10 +1166,126 @@ const oreoAI = {
 
 
     // ======================================
-    // REAL AI GENERATION
+    // RESPONSE GENERATION
     // ======================================
 
     async generateResponse(data) {
+
+
+        // ==================================
+        // FREE LOCAL OREO
+        // ==================================
+
+        if (
+            OREO_CONFIG.USE_LOCAL_AI === true
+        ) {
+
+
+            console.log(
+                "🐾 OREO LOCAL AI MODE"
+            );
+
+
+            // ==================================
+            // RESPONSE BUILDER
+            // ==================================
+
+            if (
+                window.oreoResponseBuilder
+            ) {
+
+
+                const localText =
+                    window
+                        .oreoResponseBuilder
+                        .build({
+
+                            message:
+                                data.message,
+
+                            emotion:
+                                data.understanding
+                                    .emotion?.primary,
+
+                            secondaryEmotion:
+                                data.understanding
+                                    .secondaryEmotion,
+
+                            intent:
+                                data.understanding
+                                    .intent,
+
+                            topic:
+                                data.understanding
+                                    .topic,
+
+                            scenario:
+                                data.understanding
+                                    .scenario,
+
+                            style:
+                                data.emotionalStyle,
+
+                            context:
+                                data.context,
+
+                            conversation:
+                                data.plan
+                                    .conversation,
+
+                            plan:
+                                data.plan,
+
+                            reasoning:
+                                data.reasoning,
+
+                            personality:
+                                data.personality,
+
+                            memory:
+                                window.oreoMemory
+
+                        });
+
+
+                const localResponse = {
+
+                    text:
+                        localText,
+
+                    source:
+                        "local",
+
+                    model:
+                        null,
+
+                    responseId:
+                        null
+
+                };
+
+
+                console.log(
+                    "🐾 OREO LOCAL RESPONSE:",
+                    localResponse
+                );
+
+
+                return localResponse;
+
+            }
+
+
+            throw new Error(
+                "oreoResponseBuilder.js is not loaded."
+            );
+
+        }
+
+
+        // ==================================
+        // API / REAL AI MODE
+        // ==================================
 
         if (
             !window.oreoPromptBuilder
@@ -873,7 +1299,8 @@ const oreoAI = {
 
 
         const prompt =
-            window.oreoPromptBuilder
+            window
+                .oreoPromptBuilder
                 .build({
 
                     message:
@@ -888,6 +1315,9 @@ const oreoAI = {
                     plan:
                         data.plan,
 
+                    reasoning:
+                        data.reasoning,
+
                     understanding:
                         data.understanding,
 
@@ -901,7 +1331,8 @@ const oreoAI = {
 
 
         const modelInput =
-            window.oreoPromptBuilder
+            window
+                .oreoPromptBuilder
                 .buildModelInput({
 
                     message:
@@ -915,6 +1346,9 @@ const oreoAI = {
 
                     plan:
                         data.plan,
+
+                    reasoning:
+                        data.reasoning,
 
                     understanding:
                         data.understanding,
@@ -933,6 +1367,10 @@ const oreoAI = {
             modelInput
         );
 
+
+        // ==================================
+        // CLOUDFLARE BACKEND
+        // ==================================
 
         const response =
             await fetch(
@@ -961,11 +1399,12 @@ const oreoAI = {
                         })
 
                 }
-
             );
 
 
-        if (!response.ok) {
+        if (
+            !response.ok
+        ) {
 
             const errorData =
                 await response
@@ -989,7 +1428,9 @@ const oreoAI = {
             await response.json();
 
 
-        if (!result.text) {
+        if (
+            !result.text
+        ) {
 
             throw new Error(
                 "Oreo AI returned no text."
@@ -1013,7 +1454,7 @@ const oreoAI = {
 
             model:
                 result.model ||
-                "gpt-5.6-luna",
+                "api",
 
             responseId:
                 result.responseId ||
@@ -1029,6 +1470,7 @@ const oreoAI = {
     // ======================================
 
     async updateEmotionalState(data) {
+
 
         const emotion =
             data.understanding.emotion;
@@ -1078,6 +1520,7 @@ const oreoAI = {
 
 
         switch(primary) {
+
 
             case "happy":
 
@@ -1195,12 +1638,19 @@ const oreoAI = {
 
     async storeConversation(data) {
 
-        if (!window.oreoMemory) {
+
+        if (
+            !window.oreoMemory
+        ) {
+
             return;
+
         }
 
 
-        // Save user message
+        // ==================================
+        // SAVE USER MESSAGE
+        // ==================================
 
         if (
             typeof window.oreoMemory
@@ -1208,7 +1658,8 @@ const oreoAI = {
             "function"
         ) {
 
-            window.oreoMemory
+            window
+                .oreoMemory
                 .rememberUserMessage({
 
                     message:
@@ -1243,7 +1694,9 @@ const oreoAI = {
         }
 
 
-        // Save Oreo response
+        // ==================================
+        // SAVE OREO RESPONSE
+        // ==================================
 
         if (
             typeof window.oreoMemory
@@ -1251,7 +1704,8 @@ const oreoAI = {
             "function"
         ) {
 
-            window.oreoMemory
+            window
+                .oreoMemory
                 .rememberResponse(
                     data.response.text
                 );
@@ -1259,14 +1713,18 @@ const oreoAI = {
         }
 
 
-        // Remember response question
+        // ==================================
+        // REMEMBER QUESTION
+        // ==================================
 
         const questionMatch =
             data.response.text
                 .match(/[^?]*\?/);
 
 
-        if (questionMatch) {
+        if (
+            questionMatch
+        ) {
 
             if (
                 typeof window.oreoMemory
@@ -1274,14 +1732,17 @@ const oreoAI = {
                 "function"
             ) {
 
-                window.oreoMemory
+                window
+                    .oreoMemory
                     .rememberQuestion(
                         questionMatch[0]
                     );
 
             }
 
-        } else {
+        }
+
+        else {
 
             if (
                 typeof window.oreoMemory
@@ -1289,7 +1750,8 @@ const oreoAI = {
                 "function"
             ) {
 
-                window.oreoMemory
+                window
+                    .oreoMemory
                     .clearQuestion();
 
             }
@@ -1352,6 +1814,7 @@ const oreoAI = {
 
     getCurrentSection() {
 
+
         const sections = [
 
             "emotionalDatabase",
@@ -1368,6 +1831,7 @@ const oreoAI = {
         for (
             const id of sections
         ) {
+
 
             const element =
                 document.getElementById(id);
@@ -1393,6 +1857,10 @@ const oreoAI = {
 
 };
 
+
+// ==========================================
+// EXPORT
+// ==========================================
 
 window.oreoAI =
     oreoAI;
