@@ -1,510 +1,540 @@
 // ==========================================
 // PROJECT OREO
 // RESPONSE BUILDER ENGINE
-// VERSION 7.0
-// EMOTION + CONTEXT AWARE
+// VERSION 8.0
+// MODEL-FREE CONVERSATIONAL ENGINE
 // ==========================================
-
 
 const oreoResponseBuilder = {
 
+    build(data) {
 
+        const {
+            message,
+            emotion,
+            intent,
+            topic,
+            scenario,
+            conversation,
+            plan,
+            reasoning,
+            personality,
+            memory
+        } = data;
 
-build(data){
 
+        // ==================================
+        // NORMALIZE EMOTION
+        // ==================================
 
+        const emotionName =
+            typeof emotion === "string"
+                ? emotion
+                : emotion?.primary || "normal";
 
-const {
 
+        // ==================================
+        // HELPERS
+        // ==================================
 
-message,
+        function random(array) {
 
-emotion,
+            return array[
+                Math.floor(
+                    Math.random() *
+                    array.length
+                )
+            ];
+        }
 
-secondaryEmotion,
 
-intent,
+        function avoidRepeat(pool) {
 
-topic,
+            if (
+                !memory ||
+                typeof memory.wasResponseUsed !==
+                    "function"
+            ) {
 
-scenario,
+                return pool;
+            }
 
-style,
 
-context,
+            const filtered =
+                pool.filter(
+                    response =>
+                        !memory.wasResponseUsed(
+                            response
+                        )
+                );
 
-conversation,
 
-plan,
+            return filtered.length
+                ? filtered
+                : pool;
+        }
 
-personality,
 
-memory
+        function withNickname(response) {
 
+            if (!personality) {
+                return response;
+            }
 
-}=data;
 
+            const chance =
+                personality.nicknameChance ||
+                0;
 
 
+            if (
+                Math.random() * 100 >
+                chance
+            ) {
 
+                return response;
+            }
 
 
-function random(array){
+            const nickname =
+                random([
+                    "Girl ❤️",
+                    "Babes 🥺❤️",
+                    "Daniella ❤️"
+                ]);
 
 
-return array[
+            return `${nickname} ${response}`;
+        }
 
-Math.floor(Math.random()*array.length)
 
-];
+        function finishQuestion(
+            response
+        ) {
 
+            if (
+                plan &&
+                plan.askQuestion === false
+            ) {
 
-}
+                return response
+                    .replace(
+                        /[^.!]*\?$/,
+                        "."
+                    );
+            }
 
 
+            return response;
+        }
 
 
+        // ==================================
+        // GREETING
+        // ==================================
 
+        if (
+            intent === "greeting" ||
+            emotionName === "greeting"
+        ) {
 
+            return random([
 
-function intro(){
+                "Heyyy Daniella ❤️",
 
+                "Hey girl 😭❤️",
 
-if(!personality)
+                "Hiii babes 🥺❤️",
 
-return "";
+                "Hey Daniella. Oreo is here 🐾❤️",
 
+                "Well hello there 😂❤️"
+            ]);
+        }
 
 
-return random([
+        // ==================================
+        // HAPPY
+        // ==================================
 
+        if (
+            emotionName === "happy"
+        ) {
 
-"Girl ❤️",
+            const responses = [
 
-"Babes 🥺❤️",
+                "😭❤️ okay wait, I love this energy. Tell me everything.",
 
-"Daniella ❤️"
+                "Girl ❤️ I can already tell something good happened.",
 
+                "Okayyy 😂❤️ I need the story. What's going on?",
 
-]);
+                "This is a very happy Daniella message 😭❤️"
+            ];
 
 
-}
+            return finishQuestion(
+                withNickname(
+                    random(
+                        avoidRepeat(
+                            responses
+                        )
+                    )
+                )
+            );
+        }
 
 
+        // ==================================
+        // LOVE
+        // ==================================
 
+        if (
+            emotionName === "love"
+        ) {
 
+            const responses = [
 
+                "Awww 🥺❤️ I can hear how much love there is in the way you're talking about him.",
 
+                "That's really sweet ❤️ there's clearly a lot of feeling behind that.",
 
-function avoidRepeat(pool){
+                "🥺❤️ okay, that sounds like something that means a lot to you.",
 
+                "Some people really do start feeling like home ❤️"
+            ];
 
 
-if(
+            return finishQuestion(
+                withNickname(
+                    random(
+                        avoidRepeat(
+                            responses
+                        )
+                    )
+                )
+            );
+        }
 
-!memory ||
 
-!memory.wasResponseUsed
+        // ==================================
+        // MISSING
+        // ==================================
 
-)
+        if (
+            emotionName === "missing"
+        ) {
 
-return pool;
+            const responses = [
 
+                "🥺❤️ Missing someone you love can hit really hard.",
 
+                "I know that feeling where you just wish they were beside you ❤️",
 
-const filtered = pool.filter(
+                "Distance feels different when it's someone important to you.",
 
-r=>!memory.wasResponseUsed(r)
+                "Aww babes 🥺❤️ sounds like you really want him close right now."
+            ];
 
-);
 
+            return finishQuestion(
+                withNickname(
+                    random(
+                        avoidRepeat(
+                            responses
+                        )
+                    )
+                )
+            );
+        }
 
 
-return filtered.length
+        // ==================================
+        // SAD
+        // ==================================
 
-?
+        if (
+            emotionName === "sad"
+        ) {
 
-filtered
+            const responses = [
 
-:
+                "I'm here with you ❤️",
 
-pool;
+                "That sounds really heavy 🥺",
 
+                "I hear you ❤️ you don't have to pretend you're okay with Oreo.",
 
+                "Come here 🥺❤️ tell me what's weighing on you."
+            ];
 
-}
 
+            return finishQuestion(
+                withNickname(
+                    random(
+                        avoidRepeat(
+                            responses
+                        )
+                    )
+                )
+            );
+        }
 
 
+        // ==================================
+        // INSECURITY
+        // ==================================
 
+        if (
+            emotionName === "insecurity"
+        ) {
 
+            const responses = [
 
+                "Girl ❤️ I want you to know that feeling insecure doesn't make the things you're worried about automatically true.",
 
-// ==========================================
-// RESPONSE LIBRARY
-// ==========================================
+                "I hear you 🥺❤️ and I want to understand what made you feel this way.",
 
+                "That's a painful place to be in ❤️",
 
-let responses=[];
+                "Hey, don't be so hard on yourself 🥺❤️"
+            ];
 
 
+            return finishQuestion(
+                withNickname(
+                    random(
+                        avoidRepeat(
+                            responses
+                        )
+                    )
+                )
+            );
+        }
 
 
+        // ==================================
+        // ANXIETY
+        // ==================================
 
+        if (
+            emotionName === "anxiety"
+        ) {
 
+            const responses = [
 
-// ==========================================
-// HAPPY
-// ==========================================
+                "Okay, slow down with me ❤️ one thing at a time.",
 
+                "Take a breath, babes 🥺❤️ let's deal with what's actually happening first.",
 
-if(emotion==="happy")
+                "I know your mind might be running everywhere right now ❤️",
 
-{
+                "You don't have to solve everything at once 🥺"
+            ];
 
 
-responses=[
+            return finishQuestion(
+                withNickname(
+                    random(
+                        avoidRepeat(
+                            responses
+                        )
+                    )
+                )
+            );
+        }
 
 
-"😭❤️ okay wait I love this energy. Tell me everything, what happened?",
+        // ==================================
+        // ANGRY
+        // ==================================
 
+        if (
+            emotionName === "angry"
+        ) {
 
-"Girl ❤️ I'm actually smiling hearing you this happy. What's the good news?",
+            if (
+                scenario ===
+                "relationship_conflict"
+            ) {
 
+                const responses = [
 
-"Okay okay 😂❤️ I need the story now. What made your day so good?",
+                    "Okay girl ❤️ I'm listening. What happened between you two?",
 
+                    "I can tell that really upset you. Tell me what happened.",
 
-"This is the kind of message I like seeing 🥺❤️ what happened?"
+                    "Alright, let's slow it down ❤️ what started this?",
 
+                    "I'm listening. Give me the whole story."
+                ];
 
 
-];
+                return finishQuestion(
+                    withNickname(
+                        random(
+                            avoidRepeat(
+                                responses
+                            )
+                        )
+                    )
+                );
+            }
 
-}
 
+            const responses = [
 
+                "Okay girl ❤️ I'm listening.",
 
-else if(emotion==="love")
+                "I can tell something really bothered you.",
 
-{
+                "Alright. Tell me what happened.",
 
+                "I'm here. Get it off your chest ❤️"
+            ];
 
-responses=[
 
+            return finishQuestion(
+                withNickname(
+                    random(
+                        avoidRepeat(
+                            responses
+                        )
+                    )
+                )
+            );
+        }
 
-"The way you talk about him shows how much he means to you ❤️",
 
+        // ==================================
+        // LONELY
+        // ==================================
 
-"That's really sweet 🥺❤️ what is it about him that makes you feel this way?",
+        if (
+            emotionName === "lonely"
+        ) {
 
+            const responses = [
 
-"I can tell there's a lot of love there ❤️ what made you fall for him?",
+                "I'm here with you ❤️",
 
+                "You don't have to sit with that feeling alone 🥺",
 
-"Some people just feel like home. Is that how he feels to you?"
+                "Come talk to Oreo ❤️",
 
+                "Aww babes 🥺❤️ what's making you feel alone?"
+            ];
 
 
-];
+            return finishQuestion(
+                withNickname(
+                    random(
+                        avoidRepeat(
+                            responses
+                        )
+                    )
+                )
+            );
+        }
 
-}
 
+        // ==================================
+        // RELATIONSHIP
+        // ==================================
 
+        if (
+            topic === "relationship"
+        ) {
 
+            const responses = [
 
+                "Okay ❤️ I'm following you.",
 
+                "I understand what you're saying.",
 
+                "Hmm okay, tell me more about that.",
 
-else if(emotion==="missing")
+                "I'm with you ❤️ keep going."
+            ];
 
-{
 
+            return finishQuestion(
+                withNickname(
+                    random(
+                        avoidRepeat(
+                            responses
+                        )
+                    )
+                )
+            );
+        }
 
-responses=[
 
+        // ==================================
+        // CONTINUING CONVERSATION
+        // ==================================
 
-"Missing someone you love can really hit hard 🥺❤️ what are you missing about him the most?",
+        if (
+            conversation?.continuing ||
+            reasoning?.shouldReferenceMemory
+        ) {
 
+            const responses = [
 
-"I know that feeling when you just want someone close. Is it his presence you're missing most?",
+                "Yeah ❤️ I remember where we were going with this.",
 
+                "Mhm, I'm following you.",
 
-"Distance feels so much bigger when it's someone important ❤️"
+                "Okay, I get what you're saying now.",
 
+                "Yeah, keep going. I'm listening ❤️",
 
+                "I'm with you."
+            ];
 
-];
 
-}
+            return finishQuestion(
+                withNickname(
+                    random(
+                        avoidRepeat(
+                            responses
+                        )
+                    )
+                )
+            );
+        }
 
 
+        // ==================================
+        // GENERAL FALLBACK
+        // ==================================
 
+        const responses = [
 
+            "I'm listening ❤️ tell me what's on your mind.",
 
-else if(emotion==="sad")
+            "Okay girl, talk to me.",
 
-{
+            "I'm here ❤️",
 
+            "Alright, I'm listening.",
 
-responses=[
+            "Tell Oreo what's going on 🐾❤️"
+        ];
 
 
-"I'm here with you ❤️ what happened?",
-
-
-"That sounds really heavy. Do you want to tell me what's been hurting?",
-
-
-"I hear you 🥺 what has been sitting on your heart?"
-
-
-
-];
-
-}
-
-
-
-
-
-else if(emotion==="insecurity")
-
-{
-
-
-responses=[
-
-
-"Girl ❤️ what made you feel this way about yourself?",
-
-
-"I want to understand. What happened that made you start feeling like this?",
-
-
-"That feeling can be really painful 🥺 tell me what's making you doubt yourself."
-
-
-
-];
-
-}
-
-
-
-
-
-else if(emotion==="anxiety")
-
-{
-
-
-responses=[
-
-
-"Take your time ❤️ what is the thought that keeps coming back?",
-
-
-"I know your mind might feel loud right now. What's worrying you the most?",
-
-
-"I'm listening 🥺 what is making you feel overwhelmed?"
-
-
-
-];
-
-}
-
-
-
-
-
-else if(emotion==="angry")
-
-{
-
-
-responses=[
-
-
-"Okay girl ❤️ I'm listening. What happened?",
-
-
-"I can tell something really bothered you. Tell me what went down.",
-
-
-"What happened between you two?"
-
-
-
-];
-
-}
-
-
-
-
-
-else if(emotion==="lonely")
-
-{
-
-
-responses=[
-
-
-"I'm here with you ❤️ what made you feel alone today?",
-
-
-"That feeling is tough 🥺 do you want to tell me what happened?",
-
-
-"I’m listening. What has been making you feel this way?"
-
-
-
-];
-
-}
-
-
-
-
-
-
-// ==========================================
-// SCENARIO OVERRIDE
-// ==========================================
-
-
-if(
-
-scenario==="relationship_conflict"
-
-&&
-
-emotion==="angry"
-
-)
-
-{
-
-
-responses=[
-
-
-"Girl ❤️ I'm listening. What happened between you two?",
-
-
-"That sounds like a difficult moment. What started the disagreement?",
-
-
-"I want to understand both sides. What happened?"
-
-
-
-];
-
-}
-
-
-
-
-
-// ==========================================
-// FALLBACK
-// ==========================================
-
-
-if(responses.length===0)
-
-{
-
-
-responses=[
-
-
-"I'm listening ❤️ tell me what's on your mind.",
-
-
-"Okay girl, talk to me. What's happening?",
-
-
-"I'm here ❤️ tell me more."
-
-
-
-];
-
-}
-
-
-
-
-
-const available=
-
-avoidRepeat(responses);
-
-
-
-
-
-let response=
-
-random(available);
-
-
-
-
-
-// Add nickname sometimes
-
-if(
-
-!response.startsWith("Girl")
-
-&&
-
-!response.startsWith("Babes")
-
-&&
-
-!response.startsWith("Daniella")
-
-)
-
-{
-
-
-response=
-
-intro()+" "+response;
-
-
-}
-
-
-
-
-
-
-
-return response;
-
-
-
-}
-
-
-
+        return finishQuestion(
+            withNickname(
+                random(
+                    avoidRepeat(
+                        responses
+                    )
+                )
+            )
+        );
+    }
 };
 
 
-
-
-
-
-window.oreoResponseBuilder = oreoResponseBuilder;
+window.oreoResponseBuilder =
+    oreoResponseBuilder;
