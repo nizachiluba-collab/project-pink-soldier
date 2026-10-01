@@ -1,0 +1,185 @@
+// ==========================================
+// PROJECT OREO
+// OREO LOCAL AI
+// FREE DEVELOPMENT MODE
+// ==========================================
+
+const oreoLocalAI = {
+
+    generate(data) {
+
+        const {
+            message,
+            emotion,
+            intent,
+            topic,
+            conversation,
+            personality
+        } = data;
+
+        const text = message.toLowerCase();
+
+        // ==========================================
+        // GREETINGS
+        // ==========================================
+
+        if (
+            intent === "greeting" ||
+            text === "hi" ||
+            text === "hello" ||
+            text.includes("hey oreo")
+        ) {
+
+            return {
+                text:
+                    "Hey Daniella ❤️ Oreo is online. What are we getting into today? 🐾",
+                source: "local"
+            };
+
+        }
+
+
+        // ==========================================
+        // MISSING NIZA
+        // ==========================================
+
+        if (
+            emotion === "missing" ||
+            text.includes("miss niza") ||
+            text.includes("miss him")
+        ) {
+
+            return {
+                text:
+                    "Aww Daniella 😭❤️ I know you miss him. You don't have to pretend you're okay with me. I'm right here with you. 🐾",
+                source: "local"
+            };
+
+        }
+
+
+        // ==========================================
+        // SAD
+        // ==========================================
+
+        if (emotion === "sad") {
+
+            return {
+                text:
+                    "Hey... come here for a second 🥺❤️ You don't have to carry everything by yourself. Tell me what's going on.",
+                source: "local"
+            };
+
+        }
+
+
+        // ==========================================
+        // ANXIETY
+        // ==========================================
+
+        if (emotion === "anxiety") {
+
+            return {
+                text:
+                    "Okay, breathe with me for a second ❤️ You don't have to solve everything at once. Let's take this one thing at a time.",
+                source: "local"
+            };
+
+        }
+
+
+        // ==========================================
+        // ANGER
+        // ==========================================
+
+        if (emotion === "angry") {
+
+            return {
+                text:
+                    "Okay 😭 I'm listening. Tell me what happened before we decide what we're doing about it. ❤️",
+                source: "local"
+            };
+
+        }
+
+
+        // ==========================================
+        // LOVE
+        // ==========================================
+
+        if (emotion === "love") {
+
+            return {
+                text:
+                    "Look at you being all soft 😭❤️ Niza really has you gone, doesn't he? 😂🐾",
+                source: "local"
+            };
+
+        }
+
+
+        // ==========================================
+        // HAPPY
+        // ==========================================
+
+        if (emotion === "happy") {
+
+            return {
+                text:
+                    "AYYYYY 😭❤️ I love this energy! Okay, you HAVE to tell me what happened. 🐾",
+                source: "local"
+            };
+
+        }
+
+
+        // ==========================================
+        // RELATIONSHIP
+        // ==========================================
+
+        if (topic === "relationship") {
+
+            return {
+                text:
+                    "Hmmmm 👀 okay, relationship department is officially open. Tell me what's going on, Daniella ❤️",
+                source: "local"
+            };
+
+        }
+
+
+        // ==========================================
+        // QUESTIONS ABOUT OREO
+        // ==========================================
+
+        if (
+            text.includes("what are you") ||
+            text.includes("who are you") ||
+            text.includes("what can you do")
+        ) {
+
+            return {
+                text:
+                    "I'm Oreo 🐾❤️ Niza built me to be your little AI companion — someone you can talk to, vent to, laugh with, and bother whenever you feel like it 😭.",
+                source: "local"
+            };
+
+        }
+
+
+        // ==========================================
+        // FALLBACK
+        // ==========================================
+
+        return {
+            text:
+                "Hmm... okay, I'm listening 👀❤️ Tell me a little more.",
+            source: "local"
+        };
+
+    }
+
+};
+
+
+window.oreoLocalAI = oreoLocalAI;
