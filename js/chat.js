@@ -4,123 +4,223 @@
 // =====================================
 
 
-const chatWindow =
-document.getElementById("chatWindow");
+// =====================================
+// ELEMENTS
+// =====================================
 
+const chatWindow =
+    document.getElementById("chatWindow");
 
 const userInput =
-document.getElementById("userMessage");
-
+    document.getElementById("userMessage");
 
 const sendButton =
-document.getElementById("sendButton");
+    document.getElementById("sendButton");
 
 
+// =====================================
+// ADD MESSAGE
+// =====================================
+
+function addMessage(message, type) {
+
+    const messageBox =
+        document.createElement("div");
+
+    messageBox.classList.add(type);
+
+    messageBox.textContent =
+        message;
+
+    chatWindow.appendChild(
+        messageBox
+    );
+
+    chatWindow.scrollTop =
+        chatWindow.scrollHeight;
+
+    return messageBox;
+}
 
 
-// Add messages to screen
+// =====================================
+// OREO TYPING INDICATOR
+// =====================================
 
-function addMessage(message,type){
+function showTypingIndicator() {
+
+    const typingBox =
+        document.createElement("div");
+
+    typingBox.classList.add(
+        "ai-message",
+        "oreo-typing"
+    );
+
+    typingBox.innerHTML =
+        "OREO is thinking<span class=\"typing-dots\">...</span>";
+
+    chatWindow.appendChild(typingBox);
+
+    chatWindow.scrollTop =
+        chatWindow.scrollHeight;
+
+    return typingBox;
+}
 
 
-const messageBox =
-document.createElement("div");
+// =====================================
+// SEND MESSAGE
+// =====================================
+
+async function sendMessage() {
+
+    const message =
+        userInput.value.trim();
 
 
+    // Don't send empty messages
 
-messageBox.classList.add(type);
-
-
-
-messageBox.innerHTML =
-message;
+    if (message === "") {
+        return;
+    }
 
 
+    // ---------------------------------
+    // Show user message
+    // ---------------------------------
 
-chatWindow.appendChild(messageBox);
+    addMessage(
+        message,
+        "user-message"
+    );
 
 
+    // ---------------------------------
+    // Clear input
+    // ---------------------------------
 
-chatWindow.scrollTop =
-chatWindow.scrollHeight;
+    userInput.value = "";
 
+
+    // ---------------------------------
+    // Disable input while Oreo thinks
+    // ---------------------------------
+
+    userInput.disabled = true;
+    sendButton.disabled = true;
+
+
+    // ---------------------------------
+    // Show Oreo thinking
+    // ---------------------------------
+
+    const typingIndicator =
+        showTypingIndicator();
+
+
+    try {
+
+        // ---------------------------------
+        // Give Oreo the message
+        // ---------------------------------
+
+        const response =
+            await oreoAI.respond(message);
+
+
+        // ---------------------------------
+        // Remove thinking indicator
+        // ---------------------------------
+
+        typingIndicator.remove();
+
+
+        // ---------------------------------
+        // Get actual response text
+        // ---------------------------------
+
+        const responseText =
+            response?.text ||
+            "I'm still thinking about that, Daniella ❤️";
+
+
+        // ---------------------------------
+        // Display Oreo's response
+        // ---------------------------------
+
+        addMessage(
+            responseText,
+            "ai-message"
+        );
+
+
+        // ---------------------------------
+        // DEBUG
+        // ---------------------------------
+
+        console.log(
+            "🐾 OREO RESPONSE:",
+            response
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "OREO CHAT ERROR:",
+            error
+        );
+
+
+        typingIndicator.remove();
+
+
+        addMessage(
+            "Okay... my brain just did something weird 😭❤️ Give me another second.",
+            "ai-message"
+        );
+
+    }
+
+
+    // ---------------------------------
+    // Re-enable input
+    // ---------------------------------
+
+    userInput.disabled = false;
+    sendButton.disabled = false;
+
+    userInput.focus();
 
 }
 
 
-
-
-function sendMessage(){
-
-
-const message =
-userInput.value.trim();
-
-
-
-if(message === "") return;
-
-
-
-
-// User message
-
-addMessage(
-message,
-"user-message"
-);
-
-
-
-// Clear input
-
-userInput.value="";
-
-
-
-// Oreo thinking effect
-
-setTimeout(()=>{
-
-
-const response =
-oreoAI.respond(message);
-
-
-
-addMessage(
-response,
-"ai-message"
-);
-
-
-
-},700);
-
-
-
-}
-
-
-
+// =====================================
+// SEND BUTTON
+// =====================================
 
 sendButton.addEventListener(
-"click",
-sendMessage
+    "click",
+    sendMessage
 );
 
 
+// =====================================
+// ENTER KEY
+// =====================================
 
 userInput.addEventListener(
-"keypress",
-function(event){
+    "keypress",
+    function(event) {
 
+        if (event.key === "Enter") {
 
-if(event.key === "Enter"){
+            event.preventDefault();
 
-sendMessage();
+            sendMessage();
 
-}
+        }
 
-
-});
+    }
+);
